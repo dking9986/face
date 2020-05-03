@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5639afc-b9b8-434b-b14d-eba122d18eae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Example.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e769d332-cd9f-4de1-bf3b-9ea82e0c875c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e769d332-cd9f-4de1-bf3b-9ea82e0c875c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FaceRecog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FaceRecog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FaceRecog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FaceRecog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Login$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Login$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Login$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User.class" afterDir="false" />
-    </list>
+    <list default="true" id="e5639afc-b9b8-434b-b14d-eba122d18eae" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,6 +58,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dking" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1bJowg2qP1JAeUamt8x7rtnqqjn" />
@@ -132,22 +119,7 @@
       <list>
         <serviceView>
           <treeState>
-            <expand>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:db_facerecrec" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:db_facerecrec" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@8fee848" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:db_facerecrec" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@73416b36" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </treeState>
         </serviceView>
