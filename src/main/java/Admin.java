@@ -1,3 +1,5 @@
+import org.bytedeco.javacv.FrameGrabber;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -14,9 +16,6 @@ public class Admin extends JFrame {
     private int LOGIN_WIDTH = 360;
     private int LOGIN_HEIGTH = 350;
 
-
-    Connection connection;
-    Statement stam;
 
     /**
      * 构造方法
@@ -43,7 +42,19 @@ public class Admin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == btn1) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                new FaceRecog().faceRec();
+                            } catch (FrameGrabber.Exception ex) {
+                                ex.printStackTrace();
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
 
+                        }
+                    }).start();
 
                 }
             }

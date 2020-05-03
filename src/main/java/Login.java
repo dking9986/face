@@ -28,7 +28,7 @@ public class Login extends JFrame {//登录界面类
 
         setTitle("人脸识别出入管理系统");  //设置窗体标题
         setBounds(100, 50, LOGIN_WIDTH, LOGIN_HEIGTH);  //设置窗体坐标以及打下
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //设置窗体可关闭
+        setDefaultCloseOperation(new JFrame().EXIT_ON_CLOSE);  //设置窗体可关闭
         setResizable(false);  //设置窗体大小不可以改变
         setVisible(true);
             //设置窗体可见
@@ -87,11 +87,13 @@ public class Login extends JFrame {//登录界面类
                         String sql = "select * from user where username='" + userName.getText() + "'  and password='" + password.getText() + "'     ";
                         //执行sql语句
                         ResultSet rs = stam.executeQuery(sql);
+
                         if (rs.next()) {
                             Integer t=Integer.parseInt(rs.getString("type"));
                             dispose();//关闭当前窗口
                             if (t==1){
-                                new User().setVisible(true);//类型1进入用户界面
+                                int num=rs.getInt("usernum");
+                                new User(userName.getText(),num).setVisible(true);//类型1进入用户界面
                             }
                             else if (t==0){
                                 new Admin().setVisible(true);//类型2进入管理员界面
@@ -136,7 +138,7 @@ public class Login extends JFrame {//登录界面类
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                dispose();//关闭登录窗体
+                //dispose();//关闭登录窗体
                 new Register().insertUser(); // 打开注册窗体
 
             }
@@ -148,12 +150,12 @@ public class Login extends JFrame {//登录界面类
 
     public static void main(String[] args) throws Exception {
         new Login();
-        new FaceRecog().facetrain();
+        //new FaceRecog().getFace("dk",1);
+        //new FaceRecog().faceRec();
+        //new FaceRecog().faceTrain();
 
-        Date time = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String current = sdf.format(time);
-        System.out.println(current);
+
+
     }
 
 

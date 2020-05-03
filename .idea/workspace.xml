@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5639afc-b9b8-434b-b14d-eba122d18eae" name="Default Changelist" comment="" />
+    <list default="true" id="e5639afc-b9b8-434b-b14d-eba122d18eae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e769d332-cd9f-4de1-bf3b-9ea82e0c875c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e769d332-cd9f-4de1-bf3b-9ea82e0c875c.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Example.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Example.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FaceRecog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FaceRecog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FaceRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FaceRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Admin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Admin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admin$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Admin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admin$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Admin$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admin$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Example.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Example.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FaceRecog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FaceRecog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FaceRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FaceRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Register$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Register$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Register$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Register$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Register.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,13 +59,6 @@
         <item name="db_facerecrec" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="db_facerecrec: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db_facerecrec" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="db_facerecrec: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="user: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -88,7 +107,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Example">
+  <component name="RunManager" selected="Application.Login">
     <configuration name="Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Example" />
       <module name="facerecrec" />
@@ -109,8 +128,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Example" />
         <item itemvalue="Application.Login" />
+        <item itemvalue="Application.Example" />
       </list>
     </recent_temporary>
   </component>
@@ -145,6 +164,7 @@
       <workItem from="1588444208496" duration="387000" />
       <workItem from="1588444615577" duration="1805000" />
       <workItem from="1588478111132" duration="19182000" />
+      <workItem from="1588509881580" duration="18185000" />
     </task>
     <servers />
   </component>
@@ -160,10 +180,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="438" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588435895192" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1588433717994">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1588510558292">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588433717994" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588510558292" />
     <state x="790" y="237" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1588444185808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -172,46 +192,58 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="387" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588429978083" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1588506610493">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588506610493" />
     <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1588491638234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="278" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588491638234" />
-    <state width="1877" height="89" key="GridCell.Tab.0.bottom" timestamp="1588505498192">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="132" key="GridCell.Tab.0.bottom" timestamp="1588528112643">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1862" height="80" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194954" />
-    <state width="1877" height="89" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
-    <state width="1877" height="89" key="GridCell.Tab.0.center" timestamp="1588505498192">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="91" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588515200833" />
+    <state width="1877" height="132" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588520995781" />
+    <state width="1493" height="132" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588528112643" />
+    <state width="1493" height="132" key="GridCell.Tab.0.center" timestamp="1588528112643">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1862" height="80" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194953" />
-    <state width="1877" height="89" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
-    <state width="1877" height="89" key="GridCell.Tab.0.left" timestamp="1588505498192">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="91" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588515200832" />
+    <state width="1877" height="132" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588520995781" />
+    <state width="1493" height="132" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588528112643" />
+    <state width="1493" height="132" key="GridCell.Tab.0.left" timestamp="1588528112643">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1862" height="80" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194953" />
-    <state width="1877" height="89" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
-    <state width="1877" height="89" key="GridCell.Tab.0.right" timestamp="1588505498192">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="91" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588515200832" />
+    <state width="1877" height="132" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588520995781" />
+    <state width="1493" height="132" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588528112643" />
+    <state width="1493" height="132" key="GridCell.Tab.0.right" timestamp="1588528112643">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1862" height="80" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194953" />
-    <state width="1877" height="89" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
+    <state width="1493" height="91" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588515200833" />
+    <state width="1877" height="132" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588520995781" />
+    <state width="1493" height="132" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588528112643" />
     <state x="440" y="98" key="SettingsEditor" timestamp="1588444230602">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="98" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588444230602" />
-    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1588505472193">
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2" timestamp="1588506725536">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505472193" />
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588506725536" />
+    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1588509384636">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588509384636" />
     <state x="540" y="178" key="com.intellij.database.dbimport.ImportDialog" timestamp="1588409138096">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="178" key="com.intellij.database.dbimport.ImportDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588409138096" />
-    <state x="471" y="297" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588505394135">
+    <state x="574" y="73" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588511427434">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="471" y="297" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505394135" />
+    <state x="574" y="73" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588511427434" />
     <state x="822" y="264" key="com.intellij.database.view.ui.DbObjectDialog" timestamp="1588407184291">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -220,9 +252,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588478501391" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1588443397445">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup" timestamp="1588523386013">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588443397445" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588520782873" />
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588523386013" />
   </component>
 </project>

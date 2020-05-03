@@ -85,19 +85,19 @@ public class Register  extends JFrame {
                         stam=conn.createStatement();
                         if (chkbox.isSelected()) {
                             //编写sql语句
-                            String sql = "insert into user values('" + userName.getText() + "','" + password.getText() + "',0)";
+                            String sql = "insert into user values(null,'" + userName.getText() + "','" + password.getText() + "',0)";
                             //执行sql语句
                             stam.execute(sql);
                             JOptionPane.showMessageDialog(null, "管理员注册成功!");
                             dispose();  //关闭注册窗体
                             new Login();  //打开登录窗体
                         }else{
-                            String sql = "insert into user values('" + userName.getText() + "','" + password.getText() + "',1)";
+                            String sql = "insert into user values(null,'" + userName.getText() + "','" + password.getText() + "',1)";
                             //执行sql语句
                             stam.execute(sql);
                             JOptionPane.showMessageDialog(null, "用户注册成功!");
                             dispose();  //关闭注册窗体
-                            System.out.println("打开登录窗口");
+
                             new Login();  //打开登录窗体
                         }
 
@@ -126,8 +126,6 @@ public class Register  extends JFrame {
 
                     dispose();
                 }
-
-
             }
         });
         contentPane.add(btn4);

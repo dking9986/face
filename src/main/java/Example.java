@@ -31,35 +31,28 @@ public class Example {
     public static void main(String[] args) throws Exception, InterruptedException {
         //准备两个人的训练图片，每个人脸十张
         //需要注意，训练的图片必须是相同大小的灰度图
+        /*String userName = "dk";
 
-
-        String userName = "dk";
-
-        /*//读取图片保存到mat
-        Mat s1 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\2.jpg", 0);
+        //读取图片保存到mat
+        Mat s1 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_1.jpg", 0);
         Mat y1 = new Mat();
         resize(s1, y1, new Size(350, 350));
-        Mat s2 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\3.jpg", 0);
+        Mat s2 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_2.jpg", 0);
         Mat y2 = new Mat();
         resize(s2, y2, new Size(350, 350));
-        Mat s3 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\4.jpg", 0);
+        Mat s3 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_3.jpg", 0);
         Mat y3 = new Mat();
         resize(s3, y3, new Size(350, 350));
-        Mat s4 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\5.jpg", 0);
+        Mat s4 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_4.jpg", 0);
         Mat y4 = new Mat();
         resize(s4, y4, new Size(350, 350));
-        Mat s5 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\6.jpg", 0);
+        Mat s5 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_5.jpg", 0);
         Mat y5 = new Mat();
         resize(s5, y5, new Size(350, 350));
         //前面的参数是原图 ，后面的参数是大小改变过的图
-        MatVector images = new MatVector(5);*/
-        /*File file=new File("D:\\bisheruanjian\\testpic\\train");
-        String[] imgname=file.list();
-        MatVector images = new MatVector(imgname.length);//
-        for (int i=0;i<imgname.length;i++){
-            Mat s1 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\train\\"+imgname[i]+"", 0);
-            images.put(i, s1);
-        }
+        MatVector images = new MatVector(5);
+
+
 
 
         //MatVector images = new MatVector(6);//一共20个训练样本
@@ -73,10 +66,9 @@ public class Example {
         lablesBuf.put(3, 2);
         lablesBuf.put(4, 2);
 
-*/
 
 
-       /* //写入图片
+        //写入图片
         images.put(0, y1);
         images.put(1, y2);
         images.put(2, y3);
@@ -85,6 +77,11 @@ public class Example {
 
 
         //以下读取一个文件夹的所有图片
+
+        //读取结束
+
+
+
         File file=new File("D:\\bisheruanjian\\testpic\\train");
         String[] imgname=file.list();
         MatVector images = new MatVector(imgname.length);//
@@ -104,13 +101,12 @@ public class Example {
         for (int i=0;i<imgname.length;i++){
             String[] s=imgname[i].split("_");
             int q=Integer.parseInt(s[0]);
-            lablesBuf.put(0, q);
+            lablesBuf.put(i, q);
         }
 
 
-
         //创建人脸分类器，有Fisher、Eigen、LBPH，选哪种自己决定，这里使用FisherFaceRecognizer
-//        FaceRecognizer fr = FisherFaceRecognizer.create();
+       //FaceRecognizer fr = FisherFaceRecognizer.create();
         FaceRecognizer fr = LBPHFaceRecognizer.create();
         //训练
         fr.train(images, lables);
@@ -122,7 +118,7 @@ public class Example {
         fr.read("D:\\bisheruanjian\\testpic\\LBPHFaceRecognize.xml");
         //设置阈值，阈值为0则任何人都不认识，阈值特别大的时候任何人都认识（返回和样本最相似的结果，永远不会返回-1）
         //前面忘记说了，检测返回-1代表不能和训练结果匹配
-        fr.setThreshold(110.0);
+        fr.setThreshold(3000.0);
 
 
         //*********************测试部分************************
@@ -172,10 +168,10 @@ public class Example {
                         int predictedLabel = label.get(0);//得到识别的标签值
                         System.out.println(faces.size());
 
-                        if (k < 4) {
+                        /*if (k < 6) {
                             opencv_imgcodecs.imwrite("D:\\bisheruanjian\\testpic\\" + userName + "_" + k + ".jpg", face);
                             k++;
-                        }
+                        }*/
 
                         //判断并显示
                         if (predictedLabel == 1) {
