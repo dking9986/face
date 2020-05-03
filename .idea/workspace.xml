@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5639afc-b9b8-434b-b14d-eba122d18eae" name="Default Changelist" comment="" />
+    <list default="true" id="e5639afc-b9b8-434b-b14d-eba122d18eae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Example.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e769d332-cd9f-4de1-bf3b-9ea82e0c875c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e769d332-cd9f-4de1-bf3b-9ea82e0c875c.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FaceRecog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FaceRecog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FaceRecog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FaceRecog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,9 +76,10 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Facerecrec" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1bJowg2qP1JAeUamt8x7rtnqqjn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,12 +87,28 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../community" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../rec1" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Example">
+    <configuration name="Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Example" />
+      <module name="facerecrec" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Login" />
       <module name="facerecrec" />
@@ -81,8 +116,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Login" />
+      <item itemvalue="Application.Example" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Example" />
         <item itemvalue="Application.Login" />
       </list>
     </recent_temporary>
@@ -100,7 +140,12 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:db_facerecrec" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@68146785" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@8fee848" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:db_facerecrec" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@73416b36" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -120,7 +165,14 @@
       <option name="presentableId" value="Default" />
       <updated>1588359797923</updated>
       <workItem from="1588359801061" duration="282000" />
-      <workItem from="1588400436840" duration="10026000" />
+      <workItem from="1588400436840" duration="17934000" />
+      <workItem from="1588429135588" duration="12944000" />
+      <workItem from="1588443228583" duration="228000" />
+      <workItem from="1588443476320" duration="261000" />
+      <workItem from="1588443753423" duration="438000" />
+      <workItem from="1588444208496" duration="387000" />
+      <workItem from="1588444615577" duration="1805000" />
+      <workItem from="1588478111132" duration="19182000" />
     </task>
     <servers />
   </component>
@@ -128,45 +180,77 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="438" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588409117126">
+    <state x="552" y="182" key="#Project_Structure" timestamp="1588427321188">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="438" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588409117126" />
-    <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1588359839718">
+    <state x="552" y="182" key="#Project_Structure/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588427321188" />
+    <state x="438" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588435895192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="278" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588359839718" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1588411389198">
+    <state x="438" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588435895192" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1588433717994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588411389198" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1588411389197">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588433717994" />
+    <state x="790" y="237" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1588444185808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588411389197" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1588411389197">
+    <state x="790" y="237" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588444185808" />
+    <state x="744" y="387" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1588429978083">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588411389197" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1588411389197">
+    <state x="744" y="387" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588429978083" />
+    <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1588491638234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588411389197" />
-    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1588409153568">
+    <state x="740" y="278" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588491638234" />
+    <state width="1877" height="89" key="GridCell.Tab.0.bottom" timestamp="1588505498192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588409153568" />
+    <state width="1862" height="80" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194954" />
+    <state width="1877" height="89" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
+    <state width="1877" height="89" key="GridCell.Tab.0.center" timestamp="1588505498192">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1862" height="80" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194953" />
+    <state width="1877" height="89" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
+    <state width="1877" height="89" key="GridCell.Tab.0.left" timestamp="1588505498192">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1862" height="80" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194953" />
+    <state width="1877" height="89" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
+    <state width="1877" height="89" key="GridCell.Tab.0.right" timestamp="1588505498192">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1862" height="80" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1588494194953" />
+    <state width="1877" height="89" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505498192" />
+    <state x="440" y="98" key="SettingsEditor" timestamp="1588444230602">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="98" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588444230602" />
+    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1588505472193">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="858" y="410" width="336" height="228" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505472193" />
     <state x="540" y="178" key="com.intellij.database.dbimport.ImportDialog" timestamp="1588409138096">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="540" y="178" key="com.intellij.database.dbimport.ImportDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588409138096" />
-    <state x="870" y="270" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588410770438">
+    <state x="471" y="297" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588505394135">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="870" y="270" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588410770438" />
+    <state x="471" y="297" width="568" height="743" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588505394135" />
     <state x="822" y="264" key="com.intellij.database.view.ui.DbObjectDialog" timestamp="1588407184291">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="822" y="264" key="com.intellij.database.view.ui.DbObjectDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588407184291" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1588478501391">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588478501391" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1588443397445">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1588443397445" />
   </component>
 </project>
