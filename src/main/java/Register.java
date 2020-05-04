@@ -11,19 +11,19 @@ public class Register  extends JFrame {
     private int LOGIN_WIDTH=360;
     private int LOGIN_HEIGTH=350;
     private JPanel contentPane;
-    private JTextField userName;
+    private JTextField account;
     private JTextField password;
+    private JTextField userName;
     private JButton btn3,btn4;
     private JLabel label3,label4;
     private JCheckBox chkbox;
-    Connection conn;
-    Statement stam;
-
+    Connection connection;
+    Statement statement;
 
     public void insertUser() {
 
         setTitle("注册");
-        setBounds(100, 50, LOGIN_WIDTH, LOGIN_HEIGTH	);
+        setBounds(500, 300, LOGIN_WIDTH, LOGIN_HEIGTH	);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
@@ -53,23 +53,32 @@ public class Register  extends JFrame {
 //        label4.setIcon(new ImageIcon(Login.class.getResource("/images/psw.png")));
         contentPane.add(label4);
 
+        label3=new JLabel("姓名");
+        label3.setBounds(80,194, 54, 28);
+//        label3.setIcon(new ImageIcon(Login.class.getResource("/images/user.png")));
+        contentPane.add(label3);
+
         //账号输入框
-        userName=new JTextField();
-        userName.setBounds(139, 80, 161, 25);
-        contentPane.add(userName);
+        account =new JTextField();
+        account.setBounds(139, 80, 161, 25);
+        contentPane.add(account);
 
         //密码输入框
         password=new JPasswordField();
         password.setBounds(139, 140, 161, 25);
-
         contentPane.add(password);
 
+        //姓名输入框
+        userName =new JTextField();
+        userName.setBounds(139, 200, 161, 25);
+        contentPane.add(userName);
+
         chkbox=new JCheckBox("管理员");
-        chkbox.setBounds(150, 170,65,25);
+        chkbox.setBounds(150, 230,65,25);
         contentPane.add(chkbox);
 
         btn3=new JButton("注   册");
-        btn3.setBounds(95, 210, 80, 23);
+        btn3.setBounds(95, 270, 80, 23);
 //        btn3.setIcon(new ImageIcon(Login.class.getResource("/images/insist.png")));
         btn3.addActionListener(new ActionListener() {
 
@@ -80,21 +89,21 @@ public class Register  extends JFrame {
                     try {
 
                         //加载数据库驱动
-                        conn= jdbcUtils.getConnection();
+                        connection = jdbcUtils.getConnection();
                         //创建执行sql语句的对象
-                        stam=conn.createStatement();
+                        statement = connection.createStatement();
                         if (chkbox.isSelected()) {
                             //编写sql语句
-                            String sql = "insert into user values(null,'" + userName.getText() + "','" + password.getText() + "',0)";
+                            String sql = "insert into user values(null,'" + account.getText() + "','" + password.getText() + "',0,'"+ userName.getText()+"')";
                             //执行sql语句
-                            stam.execute(sql);
+                            statement.execute(sql);
                             JOptionPane.showMessageDialog(null, "管理员注册成功!");
                             dispose();  //关闭注册窗体
                             new Login();  //打开登录窗体
                         }else{
-                            String sql = "insert into user values(null,'" + userName.getText() + "','" + password.getText() + "',1)";
+                            String sql = "insert into user values(null,'" + account.getText() + "','" + password.getText() + "',1,'"+ userName.getText()+"')";
                             //执行sql语句
-                            stam.execute(sql);
+                            statement.execute(sql);
                             JOptionPane.showMessageDialog(null, "用户注册成功!");
                             dispose();  //关闭注册窗体
 
@@ -104,7 +113,7 @@ public class Register  extends JFrame {
                     }catch (Exception e1) {
                         e1.printStackTrace();
                     }finally {
-                        jdbcUtils.result(conn, stam);
+                        jdbcUtils.result(connection, statement);
                     }
 
                 }
@@ -113,9 +122,8 @@ public class Register  extends JFrame {
         });
 
         contentPane.add(btn3);
-
         btn4=new JButton("退  出");
-        btn4.setBounds(210, 210, 80, 23);
+        btn4.setBounds(210, 270, 80, 23);
         //btn4.setIcon( new ImageIcon(Login.class.getResource("/images/exit.png")));
         btn4.addActionListener(new ActionListener() {
 

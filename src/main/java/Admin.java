@@ -5,24 +5,20 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.Statement;
 
 public class Admin extends JFrame {
     private JPanel contentPane;
-    private JButton btn1, btn2, btn3,btn4;//登录 退出 注册
+    private JButton b1, b2, b3, b4;//
     private JLabel label1, label2;
 
     private int LOGIN_WIDTH = 360;
     private int LOGIN_HEIGTH = 350;
 
 
-    /**
-     * 构造方法
-     */
-    public  Admin() {
+
+    public  Admin(int usernum,String account,String username) {
         setTitle("管理员主界面");
-        setSize(LOGIN_WIDTH, LOGIN_HEIGTH);
+        setBounds(500, 300, LOGIN_WIDTH, LOGIN_HEIGTH);  //设置窗体坐标以及打下
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,13 +31,13 @@ public class Admin extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         //按钮—运行系统
-        btn1 = new JButton("运行系统");
-        btn1.setBounds(100, 100, 100, 23);
+        b1 = new JButton("运行系统");
+        b1.setBounds(100, 100, 100, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
-        btn1.addActionListener(new ActionListener() {
+        b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == btn1) {
+                if (e.getSource() == b1) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -51,6 +47,8 @@ public class Admin extends JFrame {
                                 ex.printStackTrace();
                             } catch (InterruptedException ex) {
                                 ex.printStackTrace();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
 
                         }
@@ -59,55 +57,54 @@ public class Admin extends JFrame {
                 }
             }
         });
-        contentPane.add(btn1);
+        contentPane.add(b1);
 
         //按钮—导出记录
-        btn2 = new JButton("查询个人");
-        btn2.setBounds(100, 128, 100, 23);
+        b2 = new JButton("查询个人");
+        b2.setBounds(100, 128, 100, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
-        btn2.addActionListener(new ActionListener() {
+        b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == btn2) {
+                if (e.getSource() == b2) {
 
 
                 }
             }
         });
-        contentPane.add(btn2);
+        contentPane.add(b2);
         //按钮—导出记录
-        btn3 = new JButton("导出记录");
-        btn3.setBounds(100, 156, 100, 23);
+        b3 = new JButton("导出记录");
+        b3.setBounds(100, 156, 100, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
-        btn3.addActionListener(new ActionListener() {
+        b3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == btn3) {
-
-
+                if (e.getSource() == b3) {
+                    new FilePathChooser();
                 }
             }
         });
-        contentPane.add(btn3);
+        contentPane.add(b3);
 
 
 
 
         //按钮—退出
-        btn4 = new JButton("退出登录");
-        btn4.setBounds(210, 210, 100, 23);
+        b4 = new JButton("退出登录");
+        b4.setBounds(210, 210, 100, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
-        btn4.addActionListener(new ActionListener() {
+        b4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == btn4) {
-                    System.out.println("退出登录之后是什么样子");
+                if (e.getSource() == b4) {
+
                     new Login();
                     dispose();
                 }
             }
         });
-        contentPane.add(btn4);
+        contentPane.add(b4);
 
 
     }

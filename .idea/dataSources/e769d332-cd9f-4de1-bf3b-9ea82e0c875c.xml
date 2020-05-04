@@ -1116,43 +1116,85 @@
     </collation>
     <table id="280" parent="2" name="record"/>
     <table id="281" parent="2" name="user"/>
-    <column id="282" parent="280" name="name">
-      <Position>1</Position>
-      <DataType>varchar(128)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="283" parent="280" name="time">
-      <Position>2</Position>
-      <DataType>varchar(128)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="284" parent="280" name="type">
-      <Position>3</Position>
-      <Comment>0出
-1入</Comment>
-      <DataType>tinyint|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="285" parent="281" name="usernum">
+    <column id="282" parent="280" name="recordnum">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="281" name="username">
+    <column id="283" parent="280" name="usernum">
       <Position>2</Position>
-      <DataType>varchar(128)|0s</DataType>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="281" name="password">
+    <column id="284" parent="280" name="account">
       <Position>3</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="281" name="type">
+    <column id="285" parent="280" name="name">
+      <Position>4</Position>
+      <DataType>varchar(128)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="286" parent="280" name="type">
+      <Position>5</Position>
+      <Comment>0入
+1出</Comment>
+      <DataType>varchar(2)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="287" parent="280" name="time">
+      <Position>6</Position>
+      <DataType>varchar(128)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="288" parent="280" name="record_recordnum_uindex">
+      <ColNames>recordnum</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="289" parent="280" name="record_account_uindex">
+      <ColNames>account</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="290" parent="280" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recordnum</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="291" parent="280" name="record_recordnum_uindex">
+      <ColNames>recordnum</ColNames>
+      <UnderlyingIndexName>record_recordnum_uindex</UnderlyingIndexName>
+    </key>
+    <key id="292" parent="280" name="record_account_uindex">
+      <ColNames>account</ColNames>
+      <UnderlyingIndexName>record_account_uindex</UnderlyingIndexName>
+    </key>
+    <column id="293" parent="281" name="usernum">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="294" parent="281" name="account">
+      <Position>2</Position>
+      <DataType>varchar(128)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="295" parent="281" name="password">
+      <Position>3</Position>
+      <DataType>varchar(128)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="296" parent="281" name="type">
       <Position>4</Position>
       <Comment>0管理员
 1普通用户</Comment>
@@ -1160,28 +1202,34 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="289" parent="281" name="user_usernum_uindex">
+    <column id="297" parent="281" name="username">
+      <Position>5</Position>
+      <DataType>varchar(128)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="298" parent="281" name="user_usernum_uindex">
       <ColNames>usernum</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="290" parent="281" name="user_username_uindex">
-      <ColNames>username</ColNames>
+    <index id="299" parent="281" name="user_account_uindex">
+      <ColNames>account</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="291" parent="281" name="PRIMARY">
+    <key id="300" parent="281" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>usernum</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="292" parent="281" name="user_usernum_uindex">
+    <key id="301" parent="281" name="user_usernum_uindex">
       <ColNames>usernum</ColNames>
       <UnderlyingIndexName>user_usernum_uindex</UnderlyingIndexName>
     </key>
-    <key id="293" parent="281" name="user_username_uindex">
-      <ColNames>username</ColNames>
-      <UnderlyingIndexName>user_username_uindex</UnderlyingIndexName>
+    <key id="302" parent="281" name="user_account_uindex">
+      <ColNames>account</ColNames>
+      <UnderlyingIndexName>user_account_uindex</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

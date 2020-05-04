@@ -4,16 +4,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 
 public class Login extends JFrame {//登录界面类
 
     private JPanel contentPane;
-    private JButton btn1, btn2, btn3;//登录 退出 注册
-    private JTextField userName;
+    private JButton b1, b2, b3;//登录 退出 注册
+    private JTextField account;
     private JTextField password;
     private JLabel label1, label2;
 
@@ -22,12 +20,12 @@ public class Login extends JFrame {//登录界面类
 
 
     Connection connection;
-    Statement stam;
+    Statement statement;
 
     public  Login() {
 
         setTitle("人脸识别出入管理系统");  //设置窗体标题
-        setBounds(100, 50, LOGIN_WIDTH, LOGIN_HEIGTH);  //设置窗体坐标以及打下
+        setBounds(500, 300, LOGIN_WIDTH, LOGIN_HEIGTH);  //设置窗体坐标以及打下
         setDefaultCloseOperation(new JFrame().EXIT_ON_CLOSE);  //设置窗体可关闭
         setResizable(false);  //设置窗体大小不可以改变
         setVisible(true);
@@ -58,9 +56,9 @@ public class Login extends JFrame {//登录界面类
         contentPane.add(label2);
 
         //账号输入框
-        userName = new JTextField();
-        userName.setBounds(139, 80, 161, 25);
-        contentPane.add(userName);
+        account = new JTextField();
+        account.setBounds(139, 80, 161, 25);
+        contentPane.add(account);
 
         //密码输入框
         password = new JPasswordField();
@@ -72,78 +70,78 @@ public class Login extends JFrame {//登录界面类
 
 
         //按钮—登录
-        btn1 = new JButton("登   录");
-        btn1.setBounds(95, 210, 80, 23);
+        b1 = new JButton("登   录");//登录的时候会把用户编号传入
+        b1.setBounds(95, 210, 80, 23);
 //        btn1.setIcon(new ImageIcon(Login.class.getResource("/images/btn1.png")));
-        btn1.addActionListener(new ActionListener() {
+        b1.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == btn1) {
+                if (e.getSource() == b1) {
                     try {
                         connection = jdbcUtils.getConnection();//获取数据库连接
-                        stam = (Statement) connection.createStatement();  //创建sql语句执行对象
+                        statement = (Statement) connection.createStatement();  //创建sql语句执行对象
                         //编写sql语句
-                        String sql = "select * from user where username='" + userName.getText() + "'  and password='" + password.getText() + "'     ";
+                        String sql = "select * from user where account='" + account.getText() + "'  and password='" + password.getText() + "'     ";
                         //执行sql语句
-                        ResultSet rs = stam.executeQuery(sql);
+                        ResultSet rs = statement.executeQuery(sql);
 
                         if (rs.next()) {
                             Integer t=Integer.parseInt(rs.getString("type"));
+                            int usernum=rs.getInt("usernum");
+                            String username=rs.getString("username");
                             dispose();//关闭当前窗口
                             if (t==1){
-                                int num=rs.getInt("usernum");
-                                new User(userName.getText(),num).setVisible(true);//类型1进入用户界面
+
+                                new User(usernum,account.getText(),username).setVisible(true);//类型1进入用户界面
                             }
                             else if (t==0){
-                                new Admin().setVisible(true);//类型2进入管理员界面
-                            }
-                            else {
-                                System.out.println("不是该系统用户");
+                                new Admin(usernum,account.getText(),username).setVisible(true);//类型2进入管理员界面
                             }
 
                         }else {
-                            System.out.println("无此人");
+                            JOptionPane.showMessageDialog(null, "用户名密码错误！");
+
                         }
                     } catch (Exception e0) {
                         e0.printStackTrace();
                     } finally {
-                        jdbcUtils.result(connection, stam);
+                        jdbcUtils.result(connection, statement);
                     }
                 }
             }
         });
-        contentPane.add(btn1);
+        contentPane.add(b1);
         //按钮—退出
-        btn2 = new JButton("退  出");
-        btn2.setBounds(210, 210, 80, 23);
+        b2 = new JButton("退  出");
+        b2.setBounds(210, 210, 80, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
-        btn2.addActionListener(new ActionListener() {
+        b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == btn2) {
+                if (e.getSource() == b2) {
                     System.exit(0);
                 }
             }
         });
-        contentPane.add(btn2);
+        contentPane.add(b2);
 
 
         //按钮-注册
-        btn3 = new JButton("注        册");
-        btn3.setBounds(95, 240, 200, 23);
+        b3 = new JButton("注        册");
+        b3.setBounds(95, 240, 200, 23);
 //        btn3.setIcon(new ImageIcon(Login.class.getResource("/images/regier.png")));
-        btn3.addActionListener(new ActionListener() {
+        b3.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //dispose();//关闭登录窗体
+                dispose();//关闭登录窗体
                 new Register().insertUser(); // 打开注册窗体
 
             }
         });
-        contentPane.add(btn3);
+        contentPane.add(b3);
         repaint();//添加组件后重绘就可以直接显示
 
     }

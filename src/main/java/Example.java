@@ -31,24 +31,21 @@ public class Example {
     public static void main(String[] args) throws Exception, InterruptedException {
         //准备两个人的训练图片，每个人脸十张
         //需要注意，训练的图片必须是相同大小的灰度图
-        /*String userName = "dk";
+       /* String userName = "dk";
 
         //读取图片保存到mat
-        Mat s1 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_1.jpg", 0);
-        Mat y1 = new Mat();
-        resize(s1, y1, new Size(350, 350));
-        Mat s2 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_2.jpg", 0);
-        Mat y2 = new Mat();
-        resize(s2, y2, new Size(350, 350));
-        Mat s3 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_3.jpg", 0);
-        Mat y3 = new Mat();
-        resize(s3, y3, new Size(350, 350));
-        Mat s4 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_4.jpg", 0);
-        Mat y4 = new Mat();
-        resize(s4, y4, new Size(350, 350));
-        Mat s5 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\1_dk_5.jpg", 0);
-        Mat y5 = new Mat();
-        resize(s5, y5, new Size(350, 350));
+        Mat s1 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\train\\1_dk_1.jpg", 0);
+
+
+        Mat s2 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\train\\1_dk_2.jpg", 0);
+
+
+        Mat s3 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\train\\1_dk_3.jpg", 0);
+
+        Mat s4 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\train\\1_dk_4.jpg", 0);
+
+        Mat s5 = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\train\\1_dk_5.jpg", 0);
+
         //前面的参数是原图 ，后面的参数是大小改变过的图
         MatVector images = new MatVector(5);
 
@@ -62,18 +59,17 @@ public class Example {
         lablesBuf.put(0, 1);
         lablesBuf.put(1, 1);
         lablesBuf.put(2, 1);
-
-        lablesBuf.put(3, 2);
-        lablesBuf.put(4, 2);
+        lablesBuf.put(3, 1);
+        lablesBuf.put(4, 1);
 
 
 
         //写入图片
-        images.put(0, y1);
-        images.put(1, y2);
-        images.put(2, y3);
-        images.put(3, y4);
-        images.put(4, y5);*/
+        images.put(0, s1);
+        images.put(1, s2);
+        images.put(2, s3);
+        images.put(3, s4);
+        images.put(4, s5);*/
 
 
         //以下读取一个文件夹的所有图片
@@ -112,13 +108,14 @@ public class Example {
         fr.train(images, lables);
 
         //保存训练结果
-        fr.save("D:\\bisheruanjian\\testpic\\LBPHFaceRecognize.xml");
+        fr.save("D:\\bisheruanjian\\LBPHFaceRecognize.xml");
 
         //读取训练出的xml文件
-        fr.read("D:\\bisheruanjian\\testpic\\LBPHFaceRecognize.xml");
+        fr.read("D:\\bisheruanjian\\LBPHFaceRecognize.xml");
         //设置阈值，阈值为0则任何人都不认识，阈值特别大的时候任何人都认识（返回和样本最相似的结果，永远不会返回-1）
         //前面忘记说了，检测返回-1代表不能和训练结果匹配
-        fr.setThreshold(3000.0);
+        fr.setThreshold(80.0);
+
 
 
         //*********************测试部分************************
