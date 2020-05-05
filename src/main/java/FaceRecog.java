@@ -1,15 +1,16 @@
 import org.bytedeco.javacpp.DoublePointer;
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.opencv_imgcodecs;
-import org.bytedeco.javacv.CanvasFrame;
-import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.FrameGrabber.Exception;
-import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.bytedeco.javacv.OpenCVFrameGrabber;
+import org.bytedeco.javacv.*;
 
 import javax.swing.*;
 import java.io.File;
 import java.nio.IntBuffer;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.bytedeco.javacpp.opencv_core.*;
 import static org.bytedeco.javacpp.opencv_face.FaceRecognizer;
@@ -19,8 +20,26 @@ import static org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
 
 public class FaceRecog  {//用作所有人脸识别功能类
 
+    Connection connection;
+    Statement statement;
+    String facespath;
+    String recogpath;
 
-    public void getFace(String account,int usernum,String username,int facescount) throws Exception, Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
+    public void getFace(String account,int usernum,String username,int facescount) throws FrameGrabber.Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
+        try {
+            connection=jdbcUtils.getConnection();
+            statement=connection.createStatement();
+            String sql="select *from recognizer  ";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()){
+                facespath = resultSet.getString(4);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            jdbcUtils.result(connection, statement);
+        }
+
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
         grabber.setImageWidth(640);
         grabber.setImageHeight(480);
@@ -50,7 +69,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
             cvtColor(scr, grayscr, COLOR_BGRA2GRAY);//摄像头是彩色图像，所以先灰度化下   将图片存为灰度图保存为grayscr
             equalizeHist(grayscr, grayscr);//均衡化直方图
 
-            //读取opencv人脸检测器，参考我的路径改为自己的路径
+
             CascadeClassifier cascade = new CascadeClassifier("D:\\bisheruanjian\\opencv4\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml");
             //检测人脸
             RectVector faces = new RectVector(); //人脸对应序列
@@ -63,7 +82,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
                 if (k>20&&k<facescount+21 ) {//400ms之后再开始录入 给一点时间准备 facescount是要保存的图片数量
                     int t=k-20;
-                    opencv_imgcodecs.imwrite("D:\\bisheruanjian\\testpic\\train\\"+usernum+"_" + username + "_" + t + ".jpg", face);//保存对应图片 共五张图
+                    opencv_imgcodecs.imwrite(facespath+"\\"+usernum+"_" + username + "_" + t + ".jpg", face);//保存对应图片 共五张图
 
                 }
                 k++;
@@ -83,29 +102,54 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
     }
 
-    public void faceTrain(){//得到训练集
-        //以下读取一个文件夹的所有图片
-        File file=new File("D:\\bisheruanjian\\testpic\\train");
-        String[] imgname=file.list();
-        MatVector images = new MatVector(imgname.length);//
 
+
+    public boolean faceTrain(){//得到训练集
+        //以下读取一个文件夹的所有图片
+        try {
+            connection=jdbcUtils.getConnection();
+            statement=connection.createStatement();
+            String sql="select *from recognizer  ";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()){
+                facespath=resultSet.getString(4);
+                recogpath = resultSet.getString(3);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            jdbcUtils.result(connection, statement);
+        }
+        File file=new File(facespath);
+        String[] imgname=file.list();
+        if (file.list()!=null){
+            for (int i=0;i<imgname.length;i++){
+                String reg = "[0-9]*_._[0-9]*(.JPEG|.jpeg|.JPG|.jpg)$";
+                boolean isMatch = Pattern.matches(reg, imgname[i]);
+                if (!isMatch) {
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+
+
+
+        MatVector images = new MatVector(imgname.length);//
         Mat labels = new Mat(imgname.length, 1, CV_32SC1);
         //写入标签值
         IntBuffer lablesBuf = labels.createBuffer();
         for (int i=0;i<imgname.length;i++){
             //读取图片
-            Mat mat = opencv_imgcodecs.imread("D:\\bisheruanjian\\testpic\\train\\"+imgname[i]+"", 0);
+            Mat mat = opencv_imgcodecs.imread(facespath+"\\"+imgname[i], 0);
             images.put(i, mat);
-
             //写入标签
             String[] s=imgname[i].split("_");
             int q=Integer.parseInt(s[0]);
             lablesBuf.put(i, q);
         }
 
-        for (int i=0;i<imgname.length;i++){
-
-        }
 
 
         //创建人脸分类器，有Fisher、Eigen、LBPH，选哪种自己决定，这里使用FisherFaceRecognizer
@@ -114,16 +158,33 @@ public class FaceRecog  {//用作所有人脸识别功能类
         fr.train(images, labels);//第一个参数是一个mat集合 第二个参数是一个mat图存对应的编号
 
         //保存训练结果
-        fr.save("D:\\bisheruanjian\\testpic\\LBPHFaceRecognize.xml");
+        fr.save(recogpath+"\\LBPHFaceRecognize.xml");
+        return true;
     }
 
 
 
-    public void faceRec(long intervaltime) throws java.lang.Exception {//人脸识别运行部分
+    public boolean faceRec(long intervaltime) throws java.lang.Exception {//人脸识别运行部分
 
-
+        try {
+            connection=jdbcUtils.getConnection();
+            statement=connection.createStatement();
+            String sql="select *from recognizer  ";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()){
+                recogpath = resultSet.getString(3);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            jdbcUtils.result(connection, statement);
+        }
+        File file=new File(recogpath+"\\LBPHFaceRecognize.xml");
+        if (!file.exists()){
+            return false;
+        }
         FaceRecognizer fr = LBPHFaceRecognizer.create();
-        fr.read("D:\\bisheruanjian\\testpic\\LBPHFaceRecognize.xml");
+        fr.read(recogpath+"\\LBPHFaceRecognize.xml");
         //设置阈值
         fr.setThreshold(65.0);
 
@@ -140,7 +201,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
             if (!canvas.isShowing()) {//窗口是否关闭
                 grabber.stop();//停止抓取
-                return;
+                return true;
             }
 
             Frame frame = grabber.grab();

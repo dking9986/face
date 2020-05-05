@@ -128,8 +128,6 @@ public class ShowSelect extends JFrame {
                 //contentPane.add(jsp);
                 add(jsp);
 
-
-
                 setVisible(true);
 
             } else{

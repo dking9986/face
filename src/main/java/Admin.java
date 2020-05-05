@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public class Admin extends JFrame {
     private JPanel contentPane;
-    private JButton b1, b2, b3, b4,b5,b6,b7,b8;//
+    private JButton b1, b2, b3, b4,b5,b6,b7,b8,b9,b10;//
     private JLabel label1, label2;
 
     private int LOGIN_WIDTH = 360;
@@ -52,7 +52,10 @@ public class Admin extends JFrame {
                                 String sql="select * from recognizer ";
                                 ResultSet resultSet = statement.executeQuery(sql);
                             if (resultSet.next()){
-                                new FaceRecog().faceRec(resultSet.getLong(1));
+                                boolean b = new FaceRecog().faceRec(resultSet.getLong(1));
+                                if (!b){
+                                    JOptionPane.showMessageDialog(null, "识别器未加载，请先训练识别器");
+                                }
                             }
 
                             }catch (Exception ex) {
@@ -110,7 +113,7 @@ public class Admin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b4) {
-                    new FilePathChooser();
+                    new FilePathChooser().outputFilePathChooser();
                 }
             }
         });
@@ -138,23 +141,26 @@ public class Admin extends JFrame {
 
         //按钮—导出记录
         b6 = new JButton("校正识别器");
-        b6.setBounds(170, 50, 100, 23);
+        b6.setBounds(170, 50, 120, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b6) {
 
-                    new FaceRecog().faceTrain();
-                    JOptionPane.showMessageDialog(null,"校正完成！");
-
+                    boolean b = new FaceRecog().faceTrain();
+                    if (b) {
+                        JOptionPane.showMessageDialog(null, "校正完成！");
+                    }else {
+                        JOptionPane.showMessageDialog(null, "训练集出错！");
+                    }
                 }
             }
         });
         contentPane.add(b6);
         //按钮—导出记录
         b7 = new JButton("更改间隔时间");
-        b7.setBounds(170, 78, 100, 23);
+        b7.setBounds(170, 78, 120, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b7.addActionListener(new ActionListener() {
             @Override
@@ -166,20 +172,49 @@ public class Admin extends JFrame {
             }
         });
         contentPane.add(b7);
+
+
         //按钮—导出记录
         b8 = new JButton("更改图片数量时间");
-        b8.setBounds(170, 106, 100, 23);
+        b8.setBounds(170, 106, 130, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b8) {
                     new Input().inputFacePicNum();
-
                 }
             }
         });
         contentPane.add(b8);
+
+        //按钮—导出记录
+        b9 = new JButton("更改识别器保存位置");
+        b9.setBounds(170, 136, 150, 23);
+//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
+        b9.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == b9) {
+                    new FilePathChooser().savePathChooser("recognizerpath");
+
+                }
+            }
+        });
+        contentPane.add(b9);
+        //按钮—导出记录
+        b10 = new JButton("更改人脸图保存位置");
+        b10.setBounds(170, 166, 150, 23);
+//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
+        b10.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == b10) {
+                    new FilePathChooser().savePathChooser("facespath");
+                }
+            }
+        });
+        contentPane.add(b10);
 
     }
 
