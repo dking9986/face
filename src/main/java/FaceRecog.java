@@ -20,7 +20,7 @@ import static org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
 public class FaceRecog  {//用作所有人脸识别功能类
 
 
-    public void getFace(String account,int usernum,String username) throws Exception, Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
+    public void getFace(String account,int usernum,String username,int facescount) throws Exception, Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
         grabber.setImageWidth(640);
         grabber.setImageHeight(480);
@@ -31,7 +31,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
         int k = 1;//计数器
         while (true) {
-            if(k==33){
+            if(k==21+facescount){
                 canvas.dispose();
             }
             if (!canvas.isShowing()) {//窗口是否关闭
@@ -61,7 +61,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
                 roi = new Mat(grayscr, face_i);
                 resize(roi, face, new Size(350, 350));//我的训练样本是350*350，要对应的进行修改
 
-                if (k>20&&k<33 ) {
+                if (k>20&&k<facescount+21 ) {//400ms之后再开始录入 给一点时间准备 facescount是要保存的图片数量
                     int t=k-20;
                     opencv_imgcodecs.imwrite("D:\\bisheruanjian\\testpic\\train\\"+usernum+"_" + username + "_" + t + ".jpg", face);//保存对应图片 共五张图
 
@@ -119,7 +119,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
 
 
-    public void faceRec() throws java.lang.Exception {//人脸识别运行部分
+    public void faceRec(long intervaltime) throws java.lang.Exception {//人脸识别运行部分
 
 
         FaceRecognizer fr = LBPHFaceRecognizer.create();
@@ -188,7 +188,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
                     putText(scr, name, new Point(pos_x, pos_y), FONT_HERSHEY_PLAIN, 1.0, new Scalar(0, 255, 0, 2.0));
                     //连续5次判断都是这个人的时候记录 否则重新判断
                     if (k==5&&namebefore[0].equals(namebefore[1])&&namebefore[1].equals(namebefore[2])&&namebefore[2].equals(namebefore[3])&&namebefore[3].equals(namebefore[4])){
-                        new FaceRecord().recTrip(predictresult);//记录
+                        new FaceRecord().recTrip(predictresult,intervaltime);//记录
                         k=0;
                     }else if (k==5){
                         k=0;

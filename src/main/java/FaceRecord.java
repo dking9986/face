@@ -65,13 +65,13 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
 
 
 
-    public void recTrip(int usernum) throws Exception {//通过对应的用户编号记录出行时间 偶数是出 奇数是入 将信息插入到record表中
+    public void recTrip(int usernum,long intervaltime) throws Exception {//通过对应的用户编号记录出行时间 偶数是出 奇数是入 将信息插入到record表中
 
                 try {
-                    connection = jdbcUtils.getConnection();//获取数据库连接
-                    statement = (Statement) connection.createStatement();  //创建sql语句执行对象
                     String username=getName(usernum);
                     String account=getAccount(usernum);
+                    connection = jdbcUtils.getConnection();//获取数据库连接
+                    statement = (Statement) connection.createStatement();  //创建sql语句执行对象
                     String sql2="select count(*) from record where usernum = '"+usernum+"' ";//记录出行总次数
                     //执行sql语句
                     ResultSet rs2 = null;
@@ -105,14 +105,15 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
                         java.util.Date date1 = sdf.parse(current);//现在的时间
 
                         long diff = date1.getTime() - date.getTime();
-                        if (diff<30000){//出入间隔小于30s则不记录 大于30s则记录
+                        long inttime=intervaltime*1000;//interval单位是秒  inttime单位是ms
+                        if (diff<inttime){//出入间隔小于30s则不记录 大于30s则记录
                             return;
                         }
 
                     }
 
                     //进行record表插入
-                    String sql4="insert into record values(null ，'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"')";//记录出行总次数
+                    String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"')";//记录出行总次数
                     //执行sql语句
                     int rs4 = statement.executeUpdate(sql4);
                     if (rs4>0){

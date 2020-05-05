@@ -82,7 +82,7 @@ public class Login extends JFrame {//登录界面类
                         connection = jdbcUtils.getConnection();//获取数据库连接
                         statement = (Statement) connection.createStatement();  //创建sql语句执行对象
                         //编写sql语句
-                        String sql = "select * from user where account='" + account.getText() + "'  and password='" + password.getText() + "'     ";
+                        String sql = "select * from user where account='" + account.getText() + "'  and password='" + password.getText() + "'     ";//通过getText()获取输入的信息
                         //执行sql语句
                         ResultSet rs = statement.executeQuery(sql);
 
