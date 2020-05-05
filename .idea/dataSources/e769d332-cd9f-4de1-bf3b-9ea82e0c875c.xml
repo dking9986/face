@@ -1165,7 +1165,7 @@
       <Position>5</Position>
       <Comment>0入
 1出</Comment>
-      <DataType>varchar(2)|0s</DataType>
+      <DataType>varchar(128)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="292" parent="281" name="time">

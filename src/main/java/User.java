@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 public class User extends JFrame {
@@ -98,7 +97,7 @@ public class User extends JFrame {
             public void actionPerformed(ActionEvent e)  {
                 if (e.getSource() == b2) {
 
-                    new ShowSelect(acut);
+                    new ShowRecord().ShowAccountSelect(acut);
 
                 }
             }

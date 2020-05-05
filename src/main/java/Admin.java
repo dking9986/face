@@ -1,7 +1,4 @@
-import org.bytedeco.javacv.FrameGrabber;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +8,7 @@ import java.sql.Statement;
 
 public class Admin extends JFrame {
     private JPanel contentPane;
-    private JButton b1, b2, b3, b4,b5,b6,b7,b8,b9,b10;//
+    private JButton b1, b2, b3, b4,b5,b6,b7,b8,b9,b10,b11;//
     private JLabel label1, label2;
 
     private int LOGIN_WIDTH = 360;
@@ -97,7 +94,7 @@ public class Admin extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b3) {
 
-                    new ShowSelect();
+                    new ShowRecord().showAllRecord();
 
                 }
             }
@@ -118,6 +115,21 @@ public class Admin extends JFrame {
             }
         });
         contentPane.add(b4);
+
+
+
+        b11 = new JButton("查看所有用户信息");
+        b11.setBounds(20, 162, 130, 23);
+//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
+        b11.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == b11) {
+                    new ShowRecord().showAllUser();
+                }
+            }
+        });
+        contentPane.add(b11);
 
 
 
