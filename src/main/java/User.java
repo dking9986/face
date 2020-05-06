@@ -97,7 +97,7 @@ public class User extends JFrame {
             public void actionPerformed(ActionEvent e)  {
                 if (e.getSource() == b2) {
 
-                    new ShowRecord().ShowAccountSelect(acut);
+                    new ShowRecord().showAccountSelect(acut,"user");
 
                 }
             }

@@ -104,7 +104,7 @@ public class FilePathChooser extends JFrame {
                 try {
                     connection=jdbcUtils.getConnection();
                     statement=connection.createStatement();
-                    String sql="update recognizer set "+choosetype+"='"+ path +" '";
+                    String sql="update recognizer set "+choosetype+"='"+ path +"'";
                     statement.executeUpdate(sql);
                     System.out.println(path);
                 }catch (Exception ex) {

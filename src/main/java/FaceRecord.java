@@ -65,65 +65,106 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
 
 
 
-    public void recTrip(int usernum,long intervaltime) throws Exception {//通过对应的用户编号记录出行时间 偶数是出 奇数是入 将信息插入到record表中
+    public boolean recTrip(int usernum,long intervaltime) throws Exception {//通过对应的用户编号记录出行时间 偶数是出 奇数是入 将信息插入到record表中
+                if (usernum==-1){//如果是陌生人
+                    try {
+                        String username="unknown";
+                        String account="unknown";
+                        connection = jdbcUtils.getConnection();//获取数据库连接
+                        statement = (Statement) connection.createStatement();  //创建sql语句执行对象
 
-                try {
-                    String username=getName(usernum);
-                    String account=getAccount(usernum);
-                    connection = jdbcUtils.getConnection();//获取数据库连接
-                    statement = (Statement) connection.createStatement();  //创建sql语句执行对象
-                    String sql2="select count(*) from record where usernum = '"+usernum+"' ";//记录出行总次数
-                    //执行sql语句
-                    ResultSet rs2 = null;
-                    rs2 = statement.executeQuery(sql2);
-                    int count= 0;//初始化出行总次数 来得到是进入还是出去
-                    if (rs2.next()){
+                        String s="未知";
 
-                    count = rs2.getInt(1);
-                    }
-                    int type=count%2;
-                    String s="";
-                    if (type==0){
-                        s="入";
-                    }else {
-                        s="出";
-                    }
-                    //得到当前时间
-                    Date time = new Date(System.currentTimeMillis());
-                    DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String current = sdf.format(time);//出入时间
+                        //得到当前时间
+                        Date time = new Date(System.currentTimeMillis());
+                        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String current = sdf.format(time);//出入时间
 
-                    String sql3 = "select * from record where usernum = '"+usernum+"' order by recordnum desc " ;//得到数据库中此人的最新数据
-                    //执行sql语句
-                    ResultSet rs3 = null;
-                    rs3 = statement.executeQuery(sql3);
-                    if (rs3.next()) {
-                         String lastest=rs3.getString("time");
-
-                        java.util.Date date = sdf.parse(lastest);//之前最新的时间
-
-                        java.util.Date date1 = sdf.parse(current);//现在的时间
-
-                        long diff = date1.getTime() - date.getTime();
-                        long inttime=intervaltime*1000;//interval单位是秒  inttime单位是ms
-                        if (diff<inttime){//出入间隔小于30s则不记录 大于30s则记录
-                            return;
+                        String sql3 = "select * from record where usernum = '"+usernum+"' order by recordnum desc " ;//得到数据库中此人的最新数据
+                        //执行sql语句
+                        ResultSet rs3 = null;
+                        rs3 = statement.executeQuery(sql3);
+                        if (rs3.next()) {
+                            String lastest=rs3.getString("time");
+                            java.util.Date date = sdf.parse(lastest);//之前最新的时间
+                            java.util.Date date1 = sdf.parse(current);//现在的时间
+                            long diff = date1.getTime() - date.getTime();
+                            //long inttime=intervaltime*1000;//interval单位是秒  inttime单位是ms
+                            if (diff<10000){//陌生人出入间隔小于10s则不记录 大于10s则记录
+                                //时间小于10s
+                                return false;
+                            }
                         }
 
+                        //进行record表插入
+                        String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"')";//记录出行总次数
+                        //执行sql语句
+                        int rs4 = statement.executeUpdate(sql4);
+                        if (rs4>0){
+                            System.out.println(" 陌生人记录成功");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }finally {
+                        jdbcUtils.result(connection, statement);
                     }
+                }else {//如果是有记录的人
+                    try {
+                        String username=getName(usernum);
+                        String account=getAccount(usernum);
+                        connection = jdbcUtils.getConnection();//获取数据库连接
+                        statement = (Statement) connection.createStatement();  //创建sql语句执行对象
+                        String sql2="select count(*) from record where usernum = '"+usernum+"' ";//记录出行总次数
+                        //执行sql语句
+                        ResultSet rs2 = null;
+                        rs2 = statement.executeQuery(sql2);
+                        int count= 0;//初始化出行总次数 来得到是进入还是出去
+                        if (rs2.next()){
 
-                    //进行record表插入
-                    String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"')";//记录出行总次数
-                    //执行sql语句
-                    int rs4 = statement.executeUpdate(sql4);
-                    if (rs4>0){
-                        System.out.println("记录成功");
+                            count = rs2.getInt(1);
+                        }
+                        int type=count%2;
+                        String s="";
+                        if (type==0){
+                            s="入";
+                        }else {
+                            s="出";
+                        }
+                        //得到当前时间
+                        Date time = new Date(System.currentTimeMillis());
+                        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String current = sdf.format(time);//出入时间
+
+                        String sql3 = "select * from record where usernum = '"+usernum+"' order by recordnum desc " ;//得到数据库中此人的最新数据
+                        //执行sql语句
+                        ResultSet rs3 = null;
+                        rs3 = statement.executeQuery(sql3);
+                        if (rs3.next()) {
+                            String lastest=rs3.getString("time");
+                            java.util.Date date = sdf.parse(lastest);//之前最新的时间
+                            java.util.Date date1 = sdf.parse(current);//现在的时间
+                            long diff = date1.getTime() - date.getTime();
+                            long inttime=intervaltime*1000;//interval单位是秒  inttime单位是ms
+                            if (diff<inttime){//出入间隔小于30s则不记录 大于30s则记录
+                                return false;
+                            }
+
+                        }
+
+                        //进行record表插入
+                        String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"')";//记录出行总次数
+                        //执行sql语句
+                        int rs4 = statement.executeUpdate(sql4);
+                        if (rs4>0){
+                            System.out.println("记录成功");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }finally {
+                        jdbcUtils.result(connection, statement);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }finally {
-                    jdbcUtils.result(connection, statement);
                 }
+                return true;
 
     }
     public void writeDbExcel(String path){//导出到excel表格

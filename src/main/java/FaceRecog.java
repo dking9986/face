@@ -7,8 +7,11 @@ import javax.swing.*;
 import java.io.File;
 import java.nio.IntBuffer;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +27,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
     Statement statement;
     String facespath;
     String recogpath;
+    String strangerfacespath;
 
     public void getFace(String account,int usernum,String username,int facescount) throws FrameGrabber.Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
         try {
@@ -124,9 +128,10 @@ public class FaceRecog  {//用作所有人脸识别功能类
         String[] imgname=file.list();
         if (file.list()!=null){
             for (int i=0;i<imgname.length;i++){
-                String reg = "[0-9]*_._[0-9]*(.JPEG|.jpeg|.JPG|.jpg)$";
+                String reg = "[0-9]*[_].*[_][0-9]*(\\.jpg)$";
                 boolean isMatch = Pattern.matches(reg, imgname[i]);
-                if (!isMatch) {
+                if (!isMatch) {//如果不匹配
+                    System.out.println(isMatch);
                     return false;
                 }
             }
@@ -138,8 +143,8 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
         MatVector images = new MatVector(imgname.length);//
         Mat labels = new Mat(imgname.length, 1, CV_32SC1);
-        //写入标签值
         IntBuffer lablesBuf = labels.createBuffer();
+
         for (int i=0;i<imgname.length;i++){
             //读取图片
             Mat mat = opencv_imgcodecs.imread(facespath+"\\"+imgname[i], 0);
@@ -173,6 +178,9 @@ public class FaceRecog  {//用作所有人脸识别功能类
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()){
                 recogpath = resultSet.getString(3);
+                strangerfacespath=resultSet.getString(5);
+                System.out.println(recogpath+"\\LBPHFaceRecognize.xml");
+                System.out.println(strangerfacespath);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,7 +194,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
         FaceRecognizer fr = LBPHFaceRecognizer.create();
         fr.read(recogpath+"\\LBPHFaceRecognize.xml");
         //设置阈值
-        fr.setThreshold(65.0);
+        fr.setThreshold(40.0);
 
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
         grabber.setImageWidth(640);
@@ -196,7 +204,8 @@ public class FaceRecog  {//用作所有人脸识别功能类
         CanvasFrame canvas = new CanvasFrame("人脸检测");//新建一个窗口
         canvas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         String[] namebefore=new String[5];
-        int k=0;//计数器 计数连续人脸个数
+        int k=0;//有姓名脸计数器 计数连续人脸个数
+        int j=0;//陌生脸计数器 计数连续人脸个数
         while (true) {
 
             if (!canvas.isShowing()) {//窗口是否关闭
@@ -236,9 +245,27 @@ public class FaceRecog  {//用作所有人脸识别功能类
                 String name=new FaceRecord().getName(predictresult);//通过识别结果找人名
 
                 if (name.equals("UnknownPeople")) {//如果没有此人脸信息
+                    namebefore[j]=name;
+                    j++;
                     int pos_x = Math.max(face_i.tl().x() - 10, 0);
                     int pos_y = Math.max(face_i.tl().y() - 10, 0);
                     putText(scr, name, new Point(pos_x, pos_y), FONT_HERSHEY_PLAIN, 1.0, new Scalar(0, 0, 255, 2.0));
+
+
+                    if (j==3&&namebefore[0].equals(namebefore[1])&&namebefore[1].equals(namebefore[2])){
+                        boolean b = new FaceRecord().recTrip(-1, intervaltime);//记录
+                        if (b){
+                            Date time = new Date(System.currentTimeMillis());
+                            DateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                            String current = sdf.format(time);//出入时间
+                            opencv_imgcodecs.imwrite(strangerfacespath+"\\"+current+"_unknown_ .jpg", face);//保存对应图片 共五张图
+                            System.out.println("陌生人图片保存成功");
+                        }
+
+                        j=0;
+                    }else if (j==3){
+                        j=0;
+                    }
 
                 } else {
                     //有该人脸信息
@@ -254,7 +281,6 @@ public class FaceRecog  {//用作所有人脸识别功能类
                     }else if (k==5){
                         k=0;
                     }
-
                 }
 
             }

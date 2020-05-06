@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class Admin extends JFrame {
     private JPanel contentPane;
-    private JButton b1, b2, b3, b4,b5,b6,b7,b8,b9,b10,b11;//
+    private JButton b1, b2, b3, b4,b5,b6,b7,b8,b9,b10,b11,b12;//
     private JLabel label1, label2;
 
     private int LOGIN_WIDTH = 360;
@@ -137,7 +137,7 @@ public class Admin extends JFrame {
 
         //按钮—退出
         b5 = new JButton("退出登录");
-        b5.setBounds(210, 210, 100, 23);
+        b5.setBounds(210, 250, 100, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b5.addActionListener(new ActionListener() {
             @Override
@@ -187,7 +187,7 @@ public class Admin extends JFrame {
 
 
         //按钮—导出记录
-        b8 = new JButton("更改图片数量时间");
+        b8 = new JButton("更改每人图片数量");
         b8.setBounds(170, 106, 130, 23);
 //        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b8.addActionListener(new ActionListener() {
@@ -227,6 +227,20 @@ public class Admin extends JFrame {
             }
         });
         contentPane.add(b10);
+
+
+        b12 = new JButton("更改陌生人保存位置");
+        b12.setBounds(170, 199, 150, 23);
+//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
+        b12.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == b12) {
+                    new FilePathChooser().savePathChooser("strangerfacespath");
+                }
+            }
+        });
+        contentPane.add(b12);
 
     }
 

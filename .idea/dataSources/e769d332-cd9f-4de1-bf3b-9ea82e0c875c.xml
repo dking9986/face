@@ -1137,76 +1137,81 @@
       <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="281" name="recordnum">
+    <column id="287" parent="280" name="strangerfacespath">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="288" parent="281" name="recordnum">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="281" name="usernum">
+    <column id="289" parent="281" name="usernum">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="289" parent="281" name="account">
+    <column id="290" parent="281" name="account">
       <Position>3</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="281" name="name">
+    <column id="291" parent="281" name="name">
       <Position>4</Position>
       <DataType>varchar(128)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="281" name="type">
+    <column id="292" parent="281" name="type">
       <Position>5</Position>
       <Comment>0入
 1出</Comment>
       <DataType>varchar(128)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="281" name="time">
+    <column id="293" parent="281" name="time">
       <Position>6</Position>
       <DataType>varchar(128)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="293" parent="281" name="record_recordnum_uindex">
+    <index id="294" parent="281" name="record_recordnum_uindex">
       <ColNames>recordnum</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="294" parent="281" name="PRIMARY">
+    <key id="295" parent="281" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>recordnum</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="295" parent="281" name="record_recordnum_uindex">
+    <key id="296" parent="281" name="record_recordnum_uindex">
       <ColNames>recordnum</ColNames>
       <UnderlyingIndexName>record_recordnum_uindex</UnderlyingIndexName>
     </key>
-    <column id="296" parent="282" name="usernum">
+    <column id="297" parent="282" name="usernum">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="282" name="account">
+    <column id="298" parent="282" name="account">
       <Position>2</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="282" name="password">
+    <column id="299" parent="282" name="password">
       <Position>3</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="282" name="type">
+    <column id="300" parent="282" name="type">
       <Position>4</Position>
       <Comment>0管理员
 1普通用户</Comment>
@@ -1214,32 +1219,32 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="282" name="username">
+    <column id="301" parent="282" name="username">
       <Position>5</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="301" parent="282" name="user_usernum_uindex">
+    <index id="302" parent="282" name="user_usernum_uindex">
       <ColNames>usernum</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="302" parent="282" name="user_account_uindex">
+    <index id="303" parent="282" name="user_account_uindex">
       <ColNames>account</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="303" parent="282" name="PRIMARY">
+    <key id="304" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>usernum</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="304" parent="282" name="user_usernum_uindex">
+    <key id="305" parent="282" name="user_usernum_uindex">
       <ColNames>usernum</ColNames>
       <UnderlyingIndexName>user_usernum_uindex</UnderlyingIndexName>
     </key>
-    <key id="305" parent="282" name="user_account_uindex">
+    <key id="306" parent="282" name="user_account_uindex">
       <ColNames>account</ColNames>
       <UnderlyingIndexName>user_account_uindex</UnderlyingIndexName>
     </key>
