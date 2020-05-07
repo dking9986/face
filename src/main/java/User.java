@@ -25,9 +25,6 @@ public class User extends JFrame {
     Connection connection;
     Statement statement;
 
-    /**
-     * 构造方法
-     */
     public  User(int usernum, final String account, String username) throws FrameGrabber.Exception, InterruptedException {
 
         setTitle("用户："+username);
@@ -47,8 +44,6 @@ public class User extends JFrame {
         num=usernum;
         acut=account;
 
-
-
         //按钮—导出记录
         b1 = new JButton("录入人脸");
         b1.setBounds(100, 100, 100, 23);
@@ -57,7 +52,6 @@ public class User extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 if (e.getSource() == b1) {
-
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -67,14 +61,13 @@ public class User extends JFrame {
                                     String sql="select * from recognizer ";
                                     ResultSet resultSet = statement.executeQuery(sql);
                                     if (resultSet.next()){
-                                        new FaceRecog().getFace(acut,num,name,resultSet.getInt(2));
+                                        new FaceRecog().getFace(num,name,resultSet.getInt(2));
                                     }
                                 }  catch (Exception ex) {
                                     ex.printStackTrace();
                                 } finally {
                                     jdbcUtils.result(connection, statement);
                                 }
-
                                 new FaceRecog().faceTrain();
                                 JOptionPane.showMessageDialog(null, "人脸录入成功!");
                             }

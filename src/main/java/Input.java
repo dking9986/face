@@ -11,13 +11,12 @@ import java.sql.Statement;
 
 public class Input extends JFrame {
     private JPanel contentPane;
-    private JButton b1, b2, b3, b4;//
+    private JButton b1;
     private JLabel label1, label2,label3,label4,label5;
     private int LOGIN_WIDTH = 360;
     private int LOGIN_HEIGTH = 350;
-    private JTextField inputtext,inputtext1,inputtext2,inputtext3,inputtext4,inputtext5;
+    private JTextField inputtext,inputtext2,inputtext3,inputtext4,inputtext5;
     private long i;
-    boolean b;
 
     Connection connection;
     Statement statement;
@@ -38,18 +37,15 @@ public class Input extends JFrame {
         label1.setBounds(80, 76, 54, 28);
         contentPane.add(label1);
 
-
         inputtext = new JTextField();//输入框
         inputtext.setBounds(139, 80, 161, 25);
         contentPane.add(inputtext);
-
 
         b1 = new JButton("查找");
         b1.setBounds(210, 210, 80, 23);
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String s = "";
                 s = inputtext.getText();
                 if (s.equals("")) {
@@ -61,8 +57,6 @@ public class Input extends JFrame {
             }
         });
         contentPane.add(b1);
-
-
     }
     public void inputIntervalTime() {
         setBounds(350,360,LOGIN_WIDTH,LOGIN_HEIGTH);
@@ -82,11 +76,9 @@ public class Input extends JFrame {
         label1.setBounds(80, 76, 100, 28);
         contentPane.add(label1);
 
-
         inputtext = new JTextField();//输入框
         inputtext.setBounds(80, 105, 161, 25);
         contentPane.add(inputtext);
-
 
         b1 = new JButton("确定");
         b1.setBounds(210, 210, 80, 23);
@@ -119,7 +111,6 @@ public class Input extends JFrame {
                     JOptionPane.showMessageDialog(null, "更改成功");
                     dispose();
                 }
-
             }
         });
         contentPane.add(b1);
@@ -182,6 +173,8 @@ public class Input extends JFrame {
         });
         contentPane.add(b1);
     }
+
+    //输入新记录内容
     public void inputNewRecord(){
         setBounds(350,360,LOGIN_WIDTH,LOGIN_HEIGTH);
         setLocation(350,350);
@@ -195,52 +188,29 @@ public class Input extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        /*//输入间隔时间
-        label1 = new JLabel("用户编号");
-        label1.setBounds(20, 30, 100, 28);
-        contentPane.add(label1);
-
-
-        inputtext1 = new JTextField();//输入框
-        inputtext1.setBounds(120, 30, 161, 25);
-        contentPane.add(inputtext1);*/
-
         label2 = new JLabel("账  号");
         label2.setBounds(20, 70, 100, 28);
         contentPane.add(label2);
-
 
         inputtext2 = new JTextField();//输入框
         inputtext2.setBounds(120, 70, 161, 25);
         contentPane.add(inputtext2);
 
-        label3 = new JLabel("姓名");
-        label3.setBounds(20, 110, 100, 28);
-        contentPane.add(label3);
-
-
-        inputtext3 = new JTextField();//输入框
-        inputtext3.setBounds(120, 110, 161, 25);
-        contentPane.add(inputtext3);
-
         label4 = new JLabel("出入类型");
-        label4.setBounds(20, 150, 100, 28);
+        label4.setBounds(20, 110, 100, 28);
         contentPane.add(label4);
 
-
         inputtext4 = new JTextField();//输入框
-        inputtext4.setBounds(120, 150, 161, 25);
+        inputtext4.setBounds(120, 110, 161, 25);
         contentPane.add(inputtext4);
 
         label5 = new JLabel("时间");
-        label5.setBounds(20, 190, 100, 28);
+        label5.setBounds(20, 150, 100, 28);
         contentPane.add(label5);
 
-
         inputtext5 = new JTextField();//输入框
-        inputtext5.setBounds(120, 190, 161, 25);
+        inputtext5.setBounds(120, 150, 161, 25);
         contentPane.add(inputtext5);
-
 
         b1=new JButton("确定");
         b1.addActionListener(new ActionListener() {
@@ -248,41 +218,43 @@ public class Input extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String account=inputtext2.getText();
-                    String name=inputtext3.getText();
                     String type=inputtext4.getText();
                     String time=inputtext5.getText();
+
                     connection=jdbcUtils.getConnection();
                     statement=connection.createStatement();
                     String sql1="select  usernum from user where account='"+account+"'";
                     ResultSet resultSet = statement.executeQuery(sql1);
                     Integer usernum=-1;
+                    String phone="-1";
+                    String name="";
                     if (resultSet.next()) {
                         usernum = resultSet.getInt(1);
+                        name=new FaceRecord().getName(usernum);
+                        phone=new FaceRecord().getPhone(usernum);
+                        String sql2="insert  into record values (null ,"+usernum+",'"+account+"','"+name+"','"+type+"','"+time+"','"+phone+"')";
+                        statement.executeUpdate(sql2);
+                        JOptionPane.showMessageDialog(null, "插入成功");
+                        dispose();
+                        new ShowRecord().showAllRecord();
                     }else {
                         JOptionPane.showMessageDialog(null, "输入的账号不在数据库中 无法插入");
                     }
-
-                    String sql2="insert  into record values (null ,"+usernum+",'"+account+"','"+name+"','"+type+"','"+time+"' )";
-                    statement.executeUpdate(sql2);
                 }  catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
                     jdbcUtils.result(connection, statement);
                 }
-                JOptionPane.showMessageDialog(null, "插入成功");
 
-                new ShowRecord().showAllRecord();
 
             }
         });
         b1.setBounds(250, 250, 80, 23);
         contentPane.add(b1);
-
-
-
-
     }
-    public void inputNewRecord(final String acc){
+
+
+    public void inputNewRecord(final String account){
         setBounds(350,360,LOGIN_WIDTH,LOGIN_HEIGTH);
         setLocation(350,350);
         setDefaultCloseOperation(new JFrame().DISPOSE_ON_CLOSE);  //设置窗体可关闭
@@ -295,17 +267,7 @@ public class Input extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        /*//输入间隔时间
-        label1 = new JLabel("用户编号");
-        label1.setBounds(20, 30, 100, 28);
-        contentPane.add(label1);
-
-
-        inputtext1 = new JTextField();//输入框
-        inputtext1.setBounds(120, 30, 161, 25);
-        contentPane.add(inputtext1);*/
-
-        label2 = new JLabel("账  号");
+        /*label2 = new JLabel("账  号");
         label2.setBounds(20, 70, 100, 28);
         contentPane.add(label2);
 
@@ -313,15 +275,15 @@ public class Input extends JFrame {
         inputtext2 = new JTextField();//输入框
         inputtext2.setBounds(120, 70, 161, 25);
         contentPane.add(inputtext2);
-
-        label3 = new JLabel("姓名");
+*/
+        /*label3 = new JLabel("姓名");
         label3.setBounds(20, 110, 100, 28);
-        contentPane.add(label3);
+        contentPane.add(label3);*/
 
 
-        inputtext3 = new JTextField();//输入框
+       /* inputtext3 = new JTextField();//输入框
         inputtext3.setBounds(120, 110, 161, 25);
-        contentPane.add(inputtext3);
+        contentPane.add(inputtext3);*/
 
         label4 = new JLabel("出入类型");
         label4.setBounds(20, 150, 100, 28);
@@ -347,39 +309,38 @@ public class Input extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String account=inputtext2.getText();
-                    String name=inputtext3.getText();
+                    //String account=inputtext2.getText();
+                    //String name=inputtext3.getText();
                     String type=inputtext4.getText();
                     String time=inputtext5.getText();
+
                     connection=jdbcUtils.getConnection();
                     statement=connection.createStatement();
                     String sql1="select  usernum from user where account='"+account+"'";
                     ResultSet resultSet = statement.executeQuery(sql1);
                     Integer usernum=-1;
+                    String phone="";
+                    String name="";
                     if (resultSet.next()) {
                         usernum = resultSet.getInt(1);
+                        name=new FaceRecord().getName(usernum);
+                        phone=new FaceRecord().getPhone(usernum);
+                        String sql2="insert  into record values (null ,"+usernum+",'"+account+"','"+name+"','"+type+"','"+time+"' ,'"+phone+"')";
+                        statement.executeUpdate(sql2);
+                        JOptionPane.showMessageDialog(null, "插入成功");
+                        dispose();
+                        new ShowRecord().showAccountSelect(account,"admin");
                     }else {
                         JOptionPane.showMessageDialog(null, "输入的账号不在数据库中 无法插入");
                     }
-
-                    String sql2="insert  into record values (null ,"+usernum+",'"+account+"','"+name+"','"+type+"','"+time+"' )";
-                    statement.executeUpdate(sql2);
                 }  catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
                     jdbcUtils.result(connection, statement);
                 }
-                JOptionPane.showMessageDialog(null, "插入成功");
-
-                new ShowRecord().showAccountSelect(acc,"admin");
-
             }
         });
         b1.setBounds(250, 250, 80, 23);
         contentPane.add(b1);
-
-
-
-
     }
 }

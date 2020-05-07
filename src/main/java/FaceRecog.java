@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.bytedeco.javacpp.opencv_core.*;
@@ -29,7 +28,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
     String recogpath;
     String strangerfacespath;
 
-    public void getFace(String account,int usernum,String username,int facescount) throws FrameGrabber.Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
+    public void getFace(int usernum,String username,int facescount) throws FrameGrabber.Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
         try {
             connection=jdbcUtils.getConnection();
             statement=connection.createStatement();
@@ -52,28 +51,27 @@ public class FaceRecog  {//用作所有人脸识别功能类
         CanvasFrame canvas = new CanvasFrame("人脸录入");//新建一个窗口
         canvas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        int k = 1;//计数器
+        int k = 1;//计数器 记录时间间隔数
         while (true) {
-            if(k==21+facescount){
+            if(k==21+facescount){//图片数量足够时 关闭窗口
                 canvas.dispose();
             }
-            if (!canvas.isShowing()) {//窗口是否关闭
+            if (!canvas.isShowing()) {//窗口关闭
                 grabber.stop();//停止抓取
                 return;
-
             }
 
             Frame frame = grabber.grab();
 
             OpenCVFrameConverter.ToMat convertor = new OpenCVFrameConverter.ToMat();//用于类型转换
-            Mat scr = convertor.convertToMat(frame);//将获取的frame转化成mat数据类型         将获取到的图片保存为scr
+            Mat scr = convertor.convertToMat(frame);//将获取的frame转化成mat数据类型     将获取到的图片保存为scr
             Mat grayscr = new Mat();//灰度图
             Mat face = new Mat();//人脸
-            Mat roi = new Mat();//
-            cvtColor(scr, grayscr, COLOR_BGRA2GRAY);//摄像头是彩色图像，所以先灰度化下   将图片存为灰度图保存为grayscr
-            equalizeHist(grayscr, grayscr);//均衡化直方图
+            Mat roi = new Mat();//灰度图和对应矩形块
+            cvtColor(scr, grayscr, COLOR_BGRA2GRAY);//彩色图灰度处理   保存为grayscr
+            equalizeHist(grayscr, grayscr);//均衡直方图
 
-
+            //加载opencv的正面人脸检测器
             CascadeClassifier cascade = new CascadeClassifier("D:\\bisheruanjian\\opencv4\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml");
             //检测人脸
             RectVector faces = new RectVector(); //人脸对应序列
@@ -82,21 +80,18 @@ public class FaceRecog  {//用作所有人脸识别功能类
                 Rect face_i = faces.get(i);
                 rectangle(scr, face_i, new Scalar(0, 255, 0, 1));
                 roi = new Mat(grayscr, face_i);
-                resize(roi, face, new Size(350, 350));//我的训练样本是350*350，要对应的进行修改
+                resize(roi, face, new Size(350, 350));//样本大小都为350*350
 
-                if (k>20&&k<facescount+21 ) {//400ms之后再开始录入 给一点时间准备 facescount是要保存的图片数量
+                if (k>20&&k<facescount+21 ) {//400ms之后再开始录入 给人一点时间准备 facescount是要保存的图片数量
                     int t=k-20;
-                    opencv_imgcodecs.imwrite(facespath+"\\"+usernum+"_" + username + "_" + t + ".jpg", face);//保存对应图片 共五张图
-
+                    opencv_imgcodecs.imwrite(facespath+"\\"+usernum+"_" + username + "_" + t + ".jpg", face);//保存对应图片
                 }
                 k++;
                 //判断并显示
-
-                    String box_text = "people:"+username;
-                    int pos_x = Math.max(face_i.tl().x() - 10, 0);
-                    int pos_y = Math.max(face_i.tl().y() - 10, 0);
-                    putText(scr, box_text, new Point(pos_x, pos_y), FONT_HERSHEY_PLAIN, 1.0, new Scalar(0, 255, 0, 2.0));
-
+                String box_text = "Name:"+username;
+                int pos_x = Math.max(face_i.tl().x() - 10, 0);
+                int pos_y = Math.max(face_i.tl().y() - 10, 0);
+                putText(scr, box_text, new Point(pos_x, pos_y), FONT_HERSHEY_PLAIN, 1.0, new Scalar(0, 255, 0, 2.0));
             }
             //显示
             frame = convertor.convert(scr);//将检测结果重新的mat重新转化为frame
@@ -110,6 +105,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
     public boolean faceTrain(){//得到训练集
         //以下读取一个文件夹的所有图片
+        //获取识别器配置信息
         try {
             connection=jdbcUtils.getConnection();
             statement=connection.createStatement();
@@ -124,22 +120,20 @@ public class FaceRecog  {//用作所有人脸识别功能类
         }finally {
             jdbcUtils.result(connection, statement);
         }
+
         File file=new File(facespath);
         String[] imgname=file.list();
-        if (file.list()!=null){
+        if (file.list()!=null){//检查训练集中是否有图片 图片名是否是合法的
             for (int i=0;i<imgname.length;i++){
                 String reg = "[0-9]*[_].*[_][0-9]*(\\.jpg)$";
                 boolean isMatch = Pattern.matches(reg, imgname[i]);
                 if (!isMatch) {//如果不匹配
-                    System.out.println(isMatch);
                     return false;
                 }
             }
         }else{
             return false;
         }
-
-
 
         MatVector images = new MatVector(imgname.length);//
         Mat labels = new Mat(imgname.length, 1, CV_32SC1);
@@ -155,12 +149,10 @@ public class FaceRecog  {//用作所有人脸识别功能类
             lablesBuf.put(i, q);
         }
 
-
-
-        //创建人脸分类器，有Fisher、Eigen、LBPH，选哪种自己决定，这里使用FisherFaceRecognizer
+        //创建人脸分类器 LBPH识别器
         FaceRecognizer fr = LBPHFaceRecognizer.create();
         //训练
-        fr.train(images, labels);//第一个参数是一个mat集合 第二个参数是一个mat图存对应的编号
+        fr.train(images, labels);//第一个参数是一个mat集合 第二个参数也一个mat图 存对应的标签编号
 
         //保存训练结果
         fr.save(recogpath+"\\LBPHFaceRecognize.xml");
@@ -170,7 +162,6 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
 
     public boolean faceRec(long intervaltime) throws java.lang.Exception {//人脸识别运行部分
-
         try {
             connection=jdbcUtils.getConnection();
             statement=connection.createStatement();
@@ -215,23 +206,21 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
             Frame frame = grabber.grab();
 
-            OpenCVFrameConverter.ToMat convertor = new OpenCVFrameConverter.ToMat();//用于类型转换
-            Mat scr = convertor.convertToMat(frame);//将获取的frame转化成mat数据类型         将获取到的图片保存为scr
-            Mat grayscr = new Mat();//灰度图
-            Mat face = new Mat();//人脸
-            Mat roi = new Mat();//
-            cvtColor(scr, grayscr, COLOR_BGRA2GRAY);//摄像头是彩色图像，所以先灰度化下   将图片存为灰度图保存为grayscr
-            equalizeHist(grayscr, grayscr);//均衡化直方图
-
-            //读取opencv人脸检测器，参考我的路径改为自己的路径
+            OpenCVFrameConverter.ToMat convertor = new OpenCVFrameConverter.ToMat();
+            Mat scr = convertor.convertToMat(frame);
+            Mat grayscr = new Mat();
+            Mat face = new Mat();
+            Mat roi = new Mat();
+            cvtColor(scr, grayscr, COLOR_BGRA2GRAY);
+            equalizeHist(grayscr, grayscr);
             CascadeClassifier cascade = new CascadeClassifier("D:\\bisheruanjian\\opencv4\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml");
+
             //检测人脸
             RectVector faces = new RectVector(); //人脸对应矩形序列
             cascade.detectMultiScale(grayscr, faces);//用检测器检测人脸 对应到矩形序列上
 
             IntPointer label = new IntPointer(1);
             DoublePointer confidence = new DoublePointer(1);
-
 
             //识别人脸
             for (int i = 0; i < faces.size(); i++) {
@@ -252,16 +241,15 @@ public class FaceRecog  {//用作所有人脸识别功能类
                     putText(scr, name, new Point(pos_x, pos_y), FONT_HERSHEY_PLAIN, 1.0, new Scalar(0, 0, 255, 2.0));
 
 
-                    if (j==3&&namebefore[0].equals(namebefore[1])&&namebefore[1].equals(namebefore[2])){
+                    if (j==3&&namebefore[0].equals(namebefore[1])&&namebefore[1].equals(namebefore[2])){//连续三张图都是陌生人 则记录一次
                         boolean b = new FaceRecord().recTrip(-1, intervaltime);//记录
-                        if (b){
+                        if (b){//记录成功后保存一张图
                             Date time = new Date(System.currentTimeMillis());
                             DateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
                             String current = sdf.format(time);//出入时间
-                            opencv_imgcodecs.imwrite(strangerfacespath+"\\"+current+"_unknown_ .jpg", face);//保存对应图片 共五张图
+                            opencv_imgcodecs.imwrite(strangerfacespath+"\\"+current+"_unknown_ .jpg", face);
                             System.out.println("陌生人图片保存成功");
                         }
-
                         j=0;
                     }else if (j==3){
                         j=0;

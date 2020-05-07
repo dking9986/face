@@ -62,6 +62,27 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
         }
         return "程序错误";
     }
+    public String getPhone(int usernum){//通过用户号编号找人电话
+        String phone="";
+        try {
+            connection = jdbcUtils.getConnection();//获取数据库连接
+            statement = connection.createStatement();  //创建sql语句执行对象
+            //编写sql语句
+            String sql = "select * from user where usernum = '"+usernum+"' ";
+            //执行sql语句
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()){
+                phone=rs.getString("phone");
+                return phone;
+            }
+
+        } catch (java.lang.Exception e0) {
+            e0.printStackTrace();
+        } finally {
+            jdbcUtils.result(connection, statement);
+        }
+        return "-1";
+    }
 
 
 
@@ -72,9 +93,7 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
                         String account="unknown";
                         connection = jdbcUtils.getConnection();//获取数据库连接
                         statement = (Statement) connection.createStatement();  //创建sql语句执行对象
-
                         String s="未知";
-
                         //得到当前时间
                         Date time = new Date(System.currentTimeMillis());
                         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -97,7 +116,7 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
                         }
 
                         //进行record表插入
-                        String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"')";//记录出行总次数
+                        String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"','"+s+"','-1')";//记录出行总次数
                         //执行sql语句
                         int rs4 = statement.executeUpdate(sql4);
                         if (rs4>0){
@@ -112,15 +131,15 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
                     try {
                         String username=getName(usernum);
                         String account=getAccount(usernum);
+                        String phone=getPhone(usernum);
                         connection = jdbcUtils.getConnection();//获取数据库连接
-                        statement = (Statement) connection.createStatement();  //创建sql语句执行对象
+                        statement =  connection.createStatement();  //创建sql语句执行对象
                         String sql2="select count(*) from record where usernum = '"+usernum+"' ";//记录出行总次数
                         //执行sql语句
                         ResultSet rs2 = null;
                         rs2 = statement.executeQuery(sql2);
                         int count= 0;//初始化出行总次数 来得到是进入还是出去
                         if (rs2.next()){
-
                             count = rs2.getInt(1);
                         }
                         int type=count%2;
@@ -148,11 +167,10 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
                             if (diff<inttime){//出入间隔小于30s则不记录 大于30s则记录
                                 return false;
                             }
-
                         }
 
                         //进行record表插入
-                        String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"')";//记录出行总次数
+                        String sql4="insert into record values(null ,'"+usernum+"','"+account+"','"+username+"','"+s+"','"+current+"','"+phone+"')";//记录出行总次数
                         //执行sql语句
                         int rs4 = statement.executeUpdate(sql4);
                         if (rs4>0){
@@ -165,8 +183,9 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
                     }
                 }
                 return true;
-
     }
+
+
     public void writeDbExcel(String path){//导出到excel表格
         Date time = new Date(System.currentTimeMillis());
         DateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -207,9 +226,5 @@ public class FaceRecord {//用作所有人脸数据库信息处理类
             jdbcUtils.result(connection, statement);
         }
         return ;
-
-    }
-    public void getUser(){
-
     }
 }

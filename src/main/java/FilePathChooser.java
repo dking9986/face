@@ -7,13 +7,9 @@ import java.sql.Statement;
 public class FilePathChooser extends JFrame {
     private JLabel label=new JLabel("所选文件路径：");
     private JTextField jTextField =new JTextField(25);//输入框
-    private JButton button=new JButton("浏览");
     private JPanel panel;
-    private JButton b1, b2, b3, b4;
-    private JLabel label1, label2;
+    private JButton b1, b2;
 
-    private int LOGIN_WIDTH = 360;
-    private int LOGIN_HEIGTH = 350;
     String path="";
 
     Connection connection;
@@ -26,14 +22,6 @@ public class FilePathChooser extends JFrame {
         panel.add(jTextField);
         b1=new JButton("浏览");
         b2=new JButton("保存");
-        panel.add(b1);
-        panel.add(b2);
-        add(panel);
-        pack();    //自动调整大小
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocation(300,300);
-
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +40,7 @@ public class FilePathChooser extends JFrame {
                     jTextField.setText("未选择文件夹");
                 }
             }
-        });    //监听按钮事件
+        });
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +48,13 @@ public class FilePathChooser extends JFrame {
                 JOptionPane.showMessageDialog(null, "保存完成!");
             }
         });
+        panel.add(b1);
+        panel.add(b2);
+        add(panel);
+        pack();    //自动调整大小
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocation(300,300);
     }
 
 
@@ -70,15 +65,6 @@ public class FilePathChooser extends JFrame {
         panel.add(jTextField);
         b1=new JButton("浏览");
         b2=new JButton("确定");
-        panel.add(b1);
-        panel.add(b2);
-        add(panel);
-        pack();    //自动调整大小
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocation(300,300);
-
-
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,7 +83,7 @@ public class FilePathChooser extends JFrame {
                     jTextField.setText("未选择文件夹");
                 }
             }
-        });    //监听按钮事件
+        });
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -115,8 +101,12 @@ public class FilePathChooser extends JFrame {
                 JOptionPane.showMessageDialog(null, "更改完成!");
             }
         });
+        panel.add(b1);
+        panel.add(b2);
+        add(panel);
+        pack();    //自动调整大小
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocation(300,300);
     }
-
-
-
 }

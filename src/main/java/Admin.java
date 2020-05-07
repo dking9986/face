@@ -9,7 +9,6 @@ import java.sql.Statement;
 public class Admin extends JFrame {
     private JPanel contentPane;
     private JButton b1, b2, b3, b4,b5,b6,b7,b8,b9,b10,b11,b12;//
-    private JLabel label1, label2;
 
     private int LOGIN_WIDTH = 360;
     private int LOGIN_HEIGTH = 350;
@@ -18,24 +17,22 @@ public class Admin extends JFrame {
     Statement statement;
 
 
-    public  Admin(int usernum, final String account, String username) {
-        setTitle("管理员主界面");
+    public  Admin(int usernum, String account, String username) {
+        setTitle("管理员:"+username);
         setBounds(500, 300, LOGIN_WIDTH, LOGIN_HEIGTH);  //设置窗体坐标以及打下
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         setBackground(Color.darkGray);
 
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
-        //contentPane.setBorder(new EmptyBorder(200, 200, 200, 200));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        //按钮—运行系统
-        b1 = new JButton("运行系统");
+
+        //按钮 运行系统
+        b1 = new JButton("运行人脸识别系统");
         b1.setBounds(50, 50, 100, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,35 +57,28 @@ public class Admin extends JFrame {
                             }finally {
                                 jdbcUtils.result(connection, statement);
                             }
-
                         }
                     }).start();
-
                 }
             }
         });
         contentPane.add(b1);
 
-        //按钮—导出记录
+//        按钮 查询个人
         b2 = new JButton("查询个人");
         b2.setBounds(50, 78, 100, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b2) {
-
                         new Input().inputName();
-
                 }
             }
         });
         contentPane.add(b2);
 
-
         b3 = new JButton("打开记录");
         b3.setBounds(50, 106, 100, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,11 +91,9 @@ public class Admin extends JFrame {
         });
         contentPane.add(b3);
 
-
-        //按钮—导出记录
+        //按钮 导出记录
         b4 = new JButton("导出记录");
         b4.setBounds(50, 134, 100, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,11 +104,9 @@ public class Admin extends JFrame {
         });
         contentPane.add(b4);
 
-
-
+        //按钮 查看所有用户信息
         b11 = new JButton("查看所有用户信息");
         b11.setBounds(20, 162, 130, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b11.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,14 +117,9 @@ public class Admin extends JFrame {
         });
         contentPane.add(b11);
 
-
-
-
-
-        //按钮—退出
+        //按钮 退出登录
         b5 = new JButton("退出登录");
         b5.setBounds(210, 250, 100, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,10 +132,9 @@ public class Admin extends JFrame {
         });
         contentPane.add(b5);
 
-        //按钮—导出记录
+        //按钮 校正识别系统
         b6 = new JButton("校正识别器");
         b6.setBounds(170, 50, 120, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -170,26 +150,24 @@ public class Admin extends JFrame {
             }
         });
         contentPane.add(b6);
-        //按钮—导出记录
+
+
+        //按钮 更改间隔时间
         b7 = new JButton("更改间隔时间");
         b7.setBounds(170, 78, 120, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b7) {
                     new Input().inputIntervalTime();
-
                 }
             }
         });
         contentPane.add(b7);
 
-
-        //按钮—导出记录
+        //按钮 更改每人图片数量
         b8 = new JButton("更改每人图片数量");
         b8.setBounds(170, 106, 130, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -200,24 +178,22 @@ public class Admin extends JFrame {
         });
         contentPane.add(b8);
 
-        //按钮—导出记录
+        //按钮 更改识别器保存位置
         b9 = new JButton("更改识别器保存位置");
         b9.setBounds(170, 136, 150, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b9.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b9) {
                     new FilePathChooser().savePathChooser("recognizerpath");
-
                 }
             }
         });
         contentPane.add(b9);
-        //按钮—导出记录
+
+        //按钮 更改人脸图保存位置
         b10 = new JButton("更改人脸图保存位置");
         b10.setBounds(170, 166, 150, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b10.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -228,10 +204,9 @@ public class Admin extends JFrame {
         });
         contentPane.add(b10);
 
-
+        //按钮 更改陌生人保存位置
         b12 = new JButton("更改陌生人保存位置");
         b12.setBounds(170, 199, 150, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b12.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -241,8 +216,6 @@ public class Admin extends JFrame {
             }
         });
         contentPane.add(b12);
-
     }
-
 
 }

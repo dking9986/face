@@ -45,7 +45,6 @@ public class Login extends JFrame {//登录界面类
         //账号标签
         label1 = new JLabel("账号");
         label1.setBounds(80, 76, 54, 28);
-//        label1.setIcon(new ImageIcon(Login.class.getResource("/images/user.png")));
         contentPane.add(label1);
 
 
