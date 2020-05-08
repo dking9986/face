@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class jdbcUtils {//jdbc工具类
+public class JdbcUtils {//jdbc工具类
 
     private static final String dricerClass;
     private static final String url;

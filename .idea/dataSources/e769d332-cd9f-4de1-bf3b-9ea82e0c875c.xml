@@ -1119,12 +1119,14 @@
     <table id="282" parent="2" name="user"/>
     <column id="283" parent="280" name="intervaltime">
       <Position>1</Position>
-      <DataType>mediumtext|0s</DataType>
+      <DataType>int|0s</DataType>
+      <DefaultExpression>30</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="284" parent="280" name="facescount">
       <Position>2</Position>
       <DataType>int|0s</DataType>
+      <DefaultExpression>15</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="285" parent="280" name="recognizerpath">
@@ -1180,7 +1182,7 @@
     </column>
     <column id="294" parent="281" name="phone">
       <Position>7</Position>
-      <DataType>int|0s</DataType>
+      <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1221,7 +1223,7 @@
       <Position>4</Position>
       <Comment>0管理员
 1普通用户</Comment>
-      <DataType>tinyint|0s</DataType>
+      <DataType>varchar(4)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>

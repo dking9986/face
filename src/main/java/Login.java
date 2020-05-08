@@ -3,9 +3,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class Login extends JFrame {//登录界面类
 
@@ -17,10 +14,8 @@ public class Login extends JFrame {//登录界面类
 
     private int LOGIN_WIDTH = 360;
     private int LOGIN_HEIGTH = 350;
+    private Color color=new Color(56,189,248);
 
-
-    Connection connection;
-    Statement statement;
 
     public  Login() {
 
@@ -28,15 +23,8 @@ public class Login extends JFrame {//登录界面类
         setBounds(500, 300, LOGIN_WIDTH, LOGIN_HEIGTH);  //设置窗体坐标以及打下
         setDefaultCloseOperation(new JFrame().EXIT_ON_CLOSE);  //设置窗体可关闭
         setResizable(false);  //设置窗体大小不可以改变
-        setVisible(true);
-            //设置窗体可见
-        //设置窗体标题图标
-        /*setIconImage(
-                Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/images/log.jpg"))
-        );*/
-        /**
-         * 添加一个面板容器到窗体中
-         */
+        setVisible(true);//设置窗体可见
+
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,7 +39,6 @@ public class Login extends JFrame {//登录界面类
         //密码标签
         label2 = new JLabel("密码");
         label2.setBounds(80, 135, 54, 28);
-//        label2.setIcon(new ImageIcon(Login.class.getResource("/images/psw.png")));
         contentPane.add(label2);
 
         //账号输入框
@@ -62,50 +49,34 @@ public class Login extends JFrame {//登录界面类
         //密码输入框
         password = new JPasswordField();
         password.setBounds(139, 140, 161, 25);
-
         contentPane.add(password);
-
-
-
 
         //按钮—登录
         b1 = new JButton("登   录");//登录的时候会把用户编号传入
         b1.setBounds(95, 210, 80, 23);
-//        btn1.setIcon(new ImageIcon(Login.class.getResource("/images/btn1.png")));
+        b1.setFont(new Font("微软雅黑", Font.BOLD,15));
+        b1.setForeground(Color.WHITE);
+        b1.setBackground(color);
         b1.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == b1) {
-                    try {
-                        connection = jdbcUtils.getConnection();//获取数据库连接
-                        statement = (Statement) connection.createStatement();  //创建sql语句执行对象
-                        //编写sql语句
-                        String sql = "select * from user where account='" + account.getText() + "'  and password='" + password.getText() + "'     ";//通过getText()获取输入的信息
-                        //执行sql语句
-                        ResultSet rs = statement.executeQuery(sql);
-
-                        if (rs.next()) {
-                            Integer t=Integer.parseInt(rs.getString("type"));
-                            int usernum=rs.getInt("usernum");
-                            String username=rs.getString("username");
-                            dispose();//关闭当前窗口
-                            if (t==1){
-
+                    boolean b=new UserOperation().checkAccountandPassword(account.getText(),password.getText());
+                    if(b){
+                        int usernum=new UserOperation().getUsernum(account.getText());
+                        String username=new UserOperation().getName(usernum);
+                        String type=new UserOperation().getType(usernum);
+                        dispose();//关闭当前窗口
+                        if (type.equals("用户")){
                                 new User(usernum,account.getText(),username).setVisible(true);//类型1进入用户界面
-                            }
-                            else if (t==0){
-                                new Admin(usernum,account.getText(),username).setVisible(true);//类型2进入管理员界面
-                            }
-
-                        }else {
-                            JOptionPane.showMessageDialog(null, "用户名密码错误！");
-
                         }
-                    } catch (Exception e0) {
-                        e0.printStackTrace();
-                    } finally {
-                        jdbcUtils.result(connection, statement);
+                        else if (type.equals("管理员")){
+                            new Admin(usernum,account.getText(),username).setVisible(true);//类型2进入管理员界面
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "用户名密码错误！");
+
                     }
                 }
             }
@@ -113,8 +84,13 @@ public class Login extends JFrame {//登录界面类
         contentPane.add(b1);
         //按钮—退出
         b2 = new JButton("退  出");
+
+        b2.setFont(new Font("微软雅黑", Font.BOLD,15));
+
+        b2.setForeground(Color.WHITE);
+        b2.setBackground(color);
+
         b2.setBounds(210, 210, 80, 23);
-//        btn2.setIcon(new ImageIcon(Login.class.getResource("/images/exit.png")));
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -128,16 +104,17 @@ public class Login extends JFrame {//登录界面类
 
         //按钮-注册
         b3 = new JButton("注        册");
-        b3.setBounds(95, 240, 200, 23);
-//        btn3.setIcon(new ImageIcon(Login.class.getResource("/images/regier.png")));
+
+        b3.setFont(new Font("微软雅黑", Font.BOLD,15));
+        b3.setForeground(Color.WHITE);
+        b3.setBackground(color);
+        b3.setBounds(95, 240, 195, 23);
         b3.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 dispose();//关闭登录窗体
                 new Register().insertUser(); // 打开注册窗体
-
             }
         });
         contentPane.add(b3);
@@ -147,12 +124,6 @@ public class Login extends JFrame {//登录界面类
 
     public static void main(String[] args) throws Exception {
         new Login();
-        //new FaceRecog().getFace("dk",1);
-        //new FaceRecog().faceRec();
-        //new FaceRecog().faceTrain();
-
-
-
     }
 
 

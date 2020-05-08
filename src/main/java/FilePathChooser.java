@@ -1,22 +1,20 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.Statement;
 
 public class FilePathChooser extends JFrame {
     private JLabel label=new JLabel("所选文件路径：");
     private JTextField jTextField =new JTextField(25);//输入框
     private JPanel panel;
     private JButton b1, b2;
+    private Color color=new Color(56,189,248);
 
     String path="";
 
-    Connection connection;
-    Statement statement;
-
     public void outputFilePathChooser()
     {
+        setTitle("文件导出");
         panel =new JPanel();
         panel.add(label);
         panel.add(jTextField);
@@ -44,8 +42,9 @@ public class FilePathChooser extends JFrame {
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FaceRecord().writeDbExcel(path);
+                new RecordOperation().writeDbExcel(path);
                 JOptionPane.showMessageDialog(null, "保存完成!");
+                dispose();
             }
         });
         panel.add(b1);
@@ -60,6 +59,7 @@ public class FilePathChooser extends JFrame {
 
     public void savePathChooser(final String choosetype)
     {
+        setTitle(choosetype);
         panel =new JPanel();
         panel.add(label);
         panel.add(jTextField);
@@ -87,18 +87,13 @@ public class FilePathChooser extends JFrame {
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    connection=jdbcUtils.getConnection();
-                    statement=connection.createStatement();
-                    String sql="update recognizer set "+choosetype+"='"+ path +"'";
-                    statement.executeUpdate(sql);
-                    System.out.println(path);
-                }catch (Exception ex) {
-                    ex.printStackTrace();
-                }finally {
-                    jdbcUtils.result(connection, statement);
+                Integer flag=new RecognizerOperation().changePath(path,choosetype);
+                if (flag==1) {
+                    JOptionPane.showMessageDialog(null, "更改完成!");
+                    dispose();
+                }else {
+                    JOptionPane.showMessageDialog(null, "更改失败!");
                 }
-                JOptionPane.showMessageDialog(null, "更改完成!");
             }
         });
         panel.add(b1);

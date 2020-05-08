@@ -6,10 +6,7 @@ import org.bytedeco.javacv.*;
 import javax.swing.*;
 import java.io.File;
 import java.nio.IntBuffer;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
@@ -22,27 +19,13 @@ import static org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
 
 public class FaceRecog  {//用作所有人脸识别功能类
 
-    Connection connection;
-    Statement statement;
     String facespath;
     String recogpath;
     String strangerfacespath;
 
     public void getFace(int usernum,String username,int facescount) throws FrameGrabber.Exception, InterruptedException {   //人脸获取并保存在文件夹中 每个人保存五张图
-        try {
-            connection=jdbcUtils.getConnection();
-            statement=connection.createStatement();
-            String sql="select *from recognizer  ";
-            ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()){
-                facespath = resultSet.getString(4);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            jdbcUtils.result(connection, statement);
-        }
 
+        facespath=new RecognizerOperation().getPath("facespath");
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
         grabber.setImageWidth(640);
         grabber.setImageHeight(480);
@@ -106,21 +89,9 @@ public class FaceRecog  {//用作所有人脸识别功能类
     public boolean faceTrain(){//得到训练集
         //以下读取一个文件夹的所有图片
         //获取识别器配置信息
-        try {
-            connection=jdbcUtils.getConnection();
-            statement=connection.createStatement();
-            String sql="select *from recognizer  ";
-            ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()){
-                facespath=resultSet.getString(4);
-                recogpath = resultSet.getString(3);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            jdbcUtils.result(connection, statement);
-        }
 
+        facespath=new RecognizerOperation().getPath("facespath");
+        recogpath=new RecognizerOperation().getPath("recognizerpath");
         File file=new File(facespath);
         String[] imgname=file.list();
         if (file.list()!=null){//检查训练集中是否有图片 图片名是否是合法的
@@ -162,22 +133,9 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
 
     public boolean faceRec(long intervaltime) throws java.lang.Exception {//人脸识别运行部分
-        try {
-            connection=jdbcUtils.getConnection();
-            statement=connection.createStatement();
-            String sql="select *from recognizer  ";
-            ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()){
-                recogpath = resultSet.getString(3);
-                strangerfacespath=resultSet.getString(5);
-                System.out.println(recogpath+"\\LBPHFaceRecognize.xml");
-                System.out.println(strangerfacespath);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            jdbcUtils.result(connection, statement);
-        }
+
+        recogpath=new RecognizerOperation().getPath("recognizerpath");
+        strangerfacespath=new RecognizerOperation().getPath("strangerfacespath");
         File file=new File(recogpath+"\\LBPHFaceRecognize.xml");
         if (!file.exists()){
             return false;
@@ -231,7 +189,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
                 fr.predict(face, label, confidence);//预测face 图像是什么 保存至label中
                 int predictresult = label.get(0);//得到识别结果
 
-                String name=new FaceRecord().getName(predictresult);//通过识别结果找人名
+                String name=new UserOperation().getName(predictresult);//通过识别结果找人名
 
                 if (name.equals("UnknownPeople")) {//如果没有此人脸信息
                     namebefore[j]=name;
@@ -242,7 +200,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
 
 
                     if (j==3&&namebefore[0].equals(namebefore[1])&&namebefore[1].equals(namebefore[2])){//连续三张图都是陌生人 则记录一次
-                        boolean b = new FaceRecord().recTrip(-1, intervaltime);//记录
+                        boolean b = new RecordOperation().recTrip(-1, intervaltime);//记录
                         if (b){//记录成功后保存一张图
                             Date time = new Date(System.currentTimeMillis());
                             DateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -264,7 +222,7 @@ public class FaceRecog  {//用作所有人脸识别功能类
                     putText(scr, name, new Point(pos_x, pos_y), FONT_HERSHEY_PLAIN, 1.0, new Scalar(0, 255, 0, 2.0));
                     //连续5次判断都是这个人的时候记录 否则重新判断
                     if (k==5&&namebefore[0].equals(namebefore[1])&&namebefore[1].equals(namebefore[2])&&namebefore[2].equals(namebefore[3])&&namebefore[3].equals(namebefore[4])){
-                        new FaceRecord().recTrip(predictresult,intervaltime);//记录
+                        new RecordOperation().recTrip(predictresult,intervaltime);//记录
                         k=0;
                     }else if (k==5){
                         k=0;
